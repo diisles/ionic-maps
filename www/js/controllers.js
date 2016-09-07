@@ -1,6 +1,6 @@
-angular.module('starter')
+angular.module('starter',['ionic', 'ngCordova'])
 
-.controller('MapCtrl', function($scope,
+.controller('LoginController', function($scope,
 $ionicModal, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
@@ -42,42 +42,137 @@ $ionicModal, $timeout) {
   };
 })
 
-.controller('UserCtrl', function($scope,$http){
+.controller('signUpCtrl', function($scope,$http,$state,$stateParams){
+  $scope.userForm = {};
+
+  $scope.addUser = function() {
+    event.preventDefault();
+    if(scope.userForm.driver) {
+      $http.post('http://localhost:3000/drivers', $scope.userForm)
+      .then(function(response){
+        $state.go('map')
+      })
+      alert('Driver added to Drivers list:' + $scope.driverForm.item)
+      $scope.driverForm.item = "")
+
+    } else {
+      $http.post('http://localhost:3000/users', $scope.userForm)
+      .then(function(response){
+        $state.go('map')
+      })
+      alert('User added to Users list:' + $scope.userForm.item)
+      $scope.userForm.item = "")
+    }
+  }
+
+
+
+
+
+
+.controller('UserCtrl', function($scope,$http,$state,$stateParams){
 
   $scope.user = [];
-  $http.get('localhost:3000/users', {cache: true})
+  $http.get('http://localhost:3000/users', {cache: true})
   .then(function(response){
     $scope.user = response.data
   });
 
+  // $scope.userForm = {}
+  //
+  // $scope.addUserToUsers = function (){
+  //   event.preventDefault()
+  //   $http.post('http://localhost:3000/users', $scope.userForm)
+  //   .then(function(response){
+  //     $state.go('map')
+  //   })
+  //   alert('User added to Users list:' + $scope.userForm.item)
+  //   $scope.userForm.item = "")
+  // }
+
 })
 
-.controller('DriverCtrl', function($scope,$http){
+.controller('DriverCtrl', function($scope,$http,$state, $stateParams){
 
   $scope.driver = [];
-  $http.get('localhost:3000/drivers', {cache: true})
+  $http.get('http://localhost:3000/drivers', {cache: true})
   .then(function(response){
     $scope.driver = response.data
   });
 
-})
+  // $scope.driverForm = {}
+  //
+  // $scope.addDriverToDrivers = function (){
+  //   event.preventDefault()
+  //   $http.post('http://localhost:3000/drivers', $scope.driverForm)
+  //   .then(function(response){
+  //     $state.go('map')
+  //   })
+  //   alert('Driver added to Drivers list:' + $scope.driverForm.item)
+  //   $scope.driverForm.item = "")
+  //  }
 
-.controller('TripCtrl', function($scope, $http){
+  }
+
+
+
+.controller('TripCtrl', function($scope, $http,$state){
 
   $scope.trip = [];
-  $http.get('', {cache:true})
+  $http.get('http://loclhost:3000/trips', {cache:true})
   then.(function(response){
     $scope.trip = response.data
   });
-})
+  $scope.tripForm = {}
 
+  $scope.addTripToTrips = function (){
+    event.preventDefault()
+    $http.post('http://localhost:3000/trips', $scope.tripForm)
+    .then(function(response){
+      $state.go('map')
+    })
 
+   }
 
+    alert("Trip added to Trips list: " + $scope.tripForm.item)
+    $scope.tripForm.item = "")
+}
 
+.controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
+  var options = {timeout: 10000, enableHighAccuracy: true};
 
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
 
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
+    var mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
 
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+    //Wait until the map is loaded
+    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
 
-})
+      var marker = new google.maps.Marker({
+          map: $scope.map,
+          animation: google.maps.Animation.DROP,
+          position: latLng
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+          content: "Fill me Up!"
+      });
+
+      google.maps.event.addListener(marker, 'click', function () {
+          infoWindow.open($scope.map, marker);
+      });
+
+    });
+
+  }, function(error){
+    console.log("Could not get location");
+  });
+});
