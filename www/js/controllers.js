@@ -1,4 +1,4 @@
-angular.module('starter',['ionic', 'ngCordova'])
+angular.module('starter')
 
 .controller('LoginController', function($scope,
 $ionicModal, $timeout) {
@@ -33,6 +33,14 @@ $ionicModal, $timeout) {
 
   // perform the  login action when the user submits the login form
   $scope.doLogin = function() {
+    LoginService.loginUser($scope.data.username, $scope.data.password).succes(function(data){
+      $state.go('/map');
+    }).error(function(data){
+      var alertPopup =$ionicPopup.alert({
+        title: 'Login failed!',
+        template: 'Please check you credentials!'
+      });
+    });
     console.log('Log in time', $scope.loginData);
 
     // Simulate a login delay. Remove this and replace with your login// code if using a login system
@@ -47,13 +55,13 @@ $ionicModal, $timeout) {
 
   $scope.addUser = function() {
     event.preventDefault();
-    if(scope.userForm.driver) {
+    if($scope.userForm.driver) {
       $http.post('http://localhost:3000/drivers', $scope.userForm)
       .then(function(response){
         $state.go('map')
       })
-      alert('Driver added to Drivers list:' + $scope.driverForm.item)
-      $scope.driverForm.item = "")
+      alert('Driver added to Drivers list:' + $scope.userForm.item)
+      $scope.driverForm.item = ""
 
     } else {
       $http.post('http://localhost:3000/users', $scope.userForm)
@@ -61,10 +69,10 @@ $ionicModal, $timeout) {
         $state.go('map')
       })
       alert('User added to Users list:' + $scope.userForm.item)
-      $scope.userForm.item = "")
+      $scope.userForm.item = ""
     }
   }
-
+})
 
 
 
@@ -112,15 +120,13 @@ $ionicModal, $timeout) {
   //   $scope.driverForm.item = "")
   //  }
 
-  }
-
-
+})
 
 .controller('TripCtrl', function($scope, $http,$state){
 
   $scope.trip = [];
   $http.get('http://loclhost:3000/trips', {cache:true})
-  then.(function(response){
+  .then(function(response){
     $scope.trip = response.data
   });
   $scope.tripForm = {}
@@ -135,8 +141,23 @@ $ionicModal, $timeout) {
    }
 
     alert("Trip added to Trips list: " + $scope.tripForm.item)
-    $scope.tripForm.item = "")
-}
+    $scope.tripForm.item = ""
+})
+
+// function ContentController($scope, $ionicSideMenuDelegate) {
+//   $scope.toggleLeft = function() {
+//     $ionicSideMenuDelegate.toggleLeft();
+//   };
+// }
+.controller('ToggleCtrl', function($scope,$ionicSideMenuDelegate) {
+  $scope.toggleLeft = function() {
+    $ionicSideMenuDelegate.toggleLeft();
+  }
+})
+
+
+
+
 
 .controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
   var options = {timeout: 10000, enableHighAccuracy: true};

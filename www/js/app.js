@@ -22,9 +22,21 @@ angular.module('starter', ['ionic', 'ngCordova'])
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-  .state('signup', {
+  .state('welcome',{
+    url: '/welcome',
+    templateUrl: 'templates/welcome.html',
+    // controller: 'signUpCtrl'
+  })
+
+  .state('member-signup', {
     url: '/signup',
-    templateUrl: 'templates/signup.html',
+    templateUrl: 'templates/member-signup.html',
+    controller: 'signUpCtrl'
+  })
+
+  .state('driver-signup', {
+    url: '/signup',
+    templateUrl: 'templates/driver-signup.html',
     controller: 'signUpCtrl'
   })
 
@@ -36,7 +48,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 
   .state('login', {
     url: '/login',
-    templateUrl: 'templates/login.html',
+    templateUrl: './templates/login.html',
     controller: 'LoginController'
   })
 
@@ -60,7 +72,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 
 
 
-  $urlRouterProvider.otherwise("/login");
+  $urlRouterProvider.otherwise("/signup");
 
 })
 
