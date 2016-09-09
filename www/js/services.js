@@ -1,4 +1,6 @@
 angular.module('starter')
+var app = angular.module('ionic-socketio-chat-client', ['ionic','btford.socket-io'])
+
 
 // simple login method markup found on devdactic by Simon.
 .service('LoginService', function($q) {

@@ -60,7 +60,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 
   .state('user', {
     url: "/users/:id",
-    templateUrl: "templates/user.html",
+    templateUrl: "templates/users.html",
     controller: "UserController"
   })
 
@@ -75,6 +75,10 @@ angular.module('starter', ['ionic', 'ngCordova'])
   $urlRouterProvider.otherwise("/signup");
 
 })
+
+
+
+
 
 // .controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
 //   var options = {timeout: 10000, enableHighAccuracy: true};
