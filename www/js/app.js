@@ -4,7 +4,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'ngCordova','LocalStorageModule', 'btford.socket-io', 'angularMoment'])
+angular.module('starter', ['ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -72,7 +72,7 @@ angular.module('starter', ['ionic', 'ngCordova','LocalStorageModule', 'btford.so
 
 
 
-  $urlRouterProvider.otherwise("/signup");
+  $urlRouterProvider.otherwise("/");
 
 })
 

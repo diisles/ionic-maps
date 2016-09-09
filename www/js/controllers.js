@@ -56,7 +56,7 @@ $ionicModal, $timeout) {
   $scope.addUser = function() {
     event.preventDefault();
     if($scope.userForm.driver) {
-      $http.post('http://localhost:3000/drivers', $scope.userForm)
+      $http.post('https://mysterious-coast-25984.herokuapp.com/drivers', $scope.userForm)
       .then(function(response){
         $state.go('map')
       })
@@ -64,12 +64,12 @@ $ionicModal, $timeout) {
       $scope.driverForm.item = ""
 
     } else {
-      $http.post('http://localhost:3000/users', $scope.userForm)
+      $http.post('https://mysterious-coast-25984.herokuapp.com/users', $scope.userForm)
       .then(function(response){
         $state.go('map')
       })
-      alert('User added to Users list:' + $scope.userForm.item)
-      $scope.userForm.item = ""
+      alert('User added to Users list:' + $scope.userForm.username)
+      $scope.userForm = {}
     }
   }
 })
@@ -77,11 +77,11 @@ $ionicModal, $timeout) {
 
 
 
-
+// hiiii
 .controller('UserCtrl', function($scope,$http,$state,$stateParams){
 
   $scope.user = [];
-  $http.get('http://localhost:3000/users', {cache: true})
+  $http.get('https://mysterious-coast-25984.herokuapp.com/users', {cache: true})
   .then(function(response){
     $scope.user = response.data
   });
@@ -90,7 +90,7 @@ $ionicModal, $timeout) {
   //
   // $scope.addUserToUsers = function (){
   //   event.preventDefault()
-  //   $http.post('http://localhost:3000/users', $scope.userForm)
+  //   $http.post('https://mysterious-coast-25984.herokuapp.com/users', $scope.userForm)
   //   .then(function(response){
   //     $state.go('map')
   //   })
@@ -103,7 +103,7 @@ $ionicModal, $timeout) {
 .controller('DriverCtrl', function($scope,$http,$state, $stateParams){
 
   $scope.driver = [];
-  $http.get('http://localhost:3000/drivers', {cache: true})
+  $http.get('https://mysterious-coast-25984.herokuapp.com/drivers', {cache: true})
   .then(function(response){
     $scope.driver = response.data
   });
@@ -112,7 +112,7 @@ $ionicModal, $timeout) {
   //
   // $scope.addDriverToDrivers = function (){
   //   event.preventDefault()
-  //   $http.post('http://localhost:3000/drivers', $scope.driverForm)
+  //   $http.post('https://mysterious-coast-25984.herokuapp.com/drivers', $scope.driverForm)
   //   .then(function(response){
   //     $state.go('map')
   //   })
@@ -133,7 +133,7 @@ $ionicModal, $timeout) {
 
   $scope.addTripToTrips = function (){
     event.preventDefault()
-    $http.post('http://localhost:3000/trips', $scope.tripForm)
+    $http.post('https://mysterious-coast-25984.herokuapp.com/trips', $scope.tripForm)
     .then(function(response){
       $state.go('map')
     })
@@ -162,7 +162,7 @@ $ionicModal, $timeout) {
 .controller('MapCtrl', function($scope, $state, $cordovaGeolocation, $http, $interval) {
   var options = {timeout: 10000, enableHighAccuracy: true};
   $scope.getAllUsers = function(){
-    $http.get('http://localhost:3000/users')
+    $http.get('https://mysterious-coast-25984.herokuapp.com/users')
     .then(function(data){
       console.log(data)
       // $interval(function(){
@@ -186,7 +186,7 @@ $ionicModal, $timeout) {
     google.maps.event.addListenerOnce($scope.map, 'idle', function(){
       var markers = []
       function getUsers(){
-        $http.get('http://localhost:3000/users')
+        $http.get('https://mysterious-coast-25984.herokuapp.com/users')
         .then(function(data){
           console.log(data)
           var users = data.data.users
@@ -203,7 +203,7 @@ $ionicModal, $timeout) {
               var userLatLng = new google.maps.LatLng(users[i].location.y, users[i].location.x)
                 marker = new google.maps.Marker({
                 map: $scope.map,
-                animation: google.maps.Animation.DROP,
+                // animation: google.maps.Animation.BOUNCE,
                 position: userLatLng
               })
               markers.push(marker)
@@ -211,7 +211,7 @@ $ionicModal, $timeout) {
           }
         })
       }
-      $interval(getUsers, 10000, 5)
+      $interval(getUsers, 2000)
       var marker = new google.maps.Marker({
           map: $scope.map,
           animation: google.maps.Animation.DROP,
