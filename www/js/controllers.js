@@ -201,13 +201,15 @@ $ionicModal, $timeout) {
             if(users[i].location) {
               console.log(users[i].location)
               var userLatLng = new google.maps.LatLng(users[i].location.y, users[i].location.x)
-                marker = new google.maps.Marker({
+                var marker = new google.maps.Marker({
                 map: $scope.map,
-                // animation: google.maps.Animation.BOUNCE,
+
+                animation: google.maps.Animation.BOUNCE,
                 position: userLatLng
               })
               markers.push(marker)
             }
+
           }
         })
       }
