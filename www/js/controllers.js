@@ -159,9 +159,17 @@ $ionicModal, $timeout) {
 
 
 
-.controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
+.controller('MapCtrl', function($scope, $state, $cordovaGeolocation, $http, $interval) {
   var options = {timeout: 10000, enableHighAccuracy: true};
-
+  $scope.getAllUsers = function(){
+    $http.get('http://localhost:3000/users')
+    .then(function(data){
+      console.log(data)
+      // $interval(function(){
+      //   console.log('Yes')
+      // }, 1000)
+    })
+  }
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
 
     var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -176,7 +184,34 @@ $ionicModal, $timeout) {
 
     //Wait until the map is loaded
     google.maps.event.addListenerOnce($scope.map, 'idle', function(){
-
+      var markers = []
+      function getUsers(){
+        $http.get('http://localhost:3000/users')
+        .then(function(data){
+          console.log(data)
+          var users = data.data.users
+          function clearOverlays(){
+            for (var i = 0; i < markers.length; i++){
+              markers[i].setMap(null);
+            }
+            markers = []
+          }
+          clearOverlays()
+          for(var i = 0; i<users.length; i++){
+            if(users[i].location) {
+              console.log(users[i].location)
+              var userLatLng = new google.maps.LatLng(users[i].location.y, users[i].location.x)
+                marker = new google.maps.Marker({
+                map: $scope.map,
+                animation: google.maps.Animation.DROP,
+                position: userLatLng
+              })
+              markers.push(marker)
+            }
+          }
+        })
+      }
+      $interval(getUsers, 10000, 5)
       var marker = new google.maps.Marker({
           map: $scope.map,
           animation: google.maps.Animation.DROP,
