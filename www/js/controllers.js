@@ -201,9 +201,18 @@ $ionicModal, $timeout) {
             if(users[i].location) {
               console.log(users[i].location)
               var userLatLng = new google.maps.LatLng(users[i].location.y, users[i].location.x)
+// this code below sets a image that can be used as the marker for drivers.
+              var image = {
+    url: 'https://d30y9cdsu7xlg0.cloudfront.net/png/3306-200.png',
+     size: new google.maps.Size(71, 71),
+     origin: new google.maps.Point(0, 0),
+     anchor: new google.maps.Point(17, 34),
+     scaledSize: new google.maps.Size(25, 25)
+   };
+
                 var marker = new google.maps.Marker({
                 map: $scope.map,
-
+                icon: image,
                 animation: google.maps.Animation.BOUNCE,
                 position: userLatLng
               })
