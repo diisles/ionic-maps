@@ -17,7 +17,7 @@ function initLocationSharing(location_callback, error_callback){
     // ================================
     // Setup Socket IO
     // ================================
-    var socket = io.connect('/');
+    var socket = io.connect('http://locahost:8100/');
     socket.on('connect', function () {
         socket.on('location', function(location){
             if(location.id != userInfo.id) {
@@ -38,15 +38,15 @@ function initLocationSharing(location_callback, error_callback){
         userInfo.latitude  = position.coords.latitude;
         userInfo.longitude = position.coords.longitude;
         location_callback(userInfo);
-        sendLocation();
+        resendLocation();
     }
 
     function geo_error() {
         error_callback();
     }
 
-    var sendLocationTimeout = null;
-    function sendLocation(){
+    var resendLocationTimeout = null;
+    function resendLocation(){
         socket.emit('location', userInfo);
         clearTimeout(sendLocationTimeout);
         sendLocationTimeout = setTimeout(sendLocation, 1000*5);
