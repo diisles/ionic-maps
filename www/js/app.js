@@ -72,7 +72,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 
 
 
-  $urlRouterProvider.otherwise("/signup");
+  $urlRouterProvider.otherwise("/");
 
 })
 
