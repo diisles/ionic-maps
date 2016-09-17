@@ -3,17 +3,20 @@
 </ion-header-bar>
 
 <ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
+  <!-- <ion-header-bar>
+    <h1 class="title">Login</h1> -->
 
-      <div class="buttons">
+      <!-- <div class="buttons">
         <button class="button button-clear" ng-click="closeLogin()">Close</button>
-      </div>
-  </ion-header-bar>
-  <ion-content>
+      </div> -->
+  <!-- </ion-header-bar> -->
+  <ion-content scroll="true">
     <section class='login-container'>
-      <form ng-submit="doLogin()">
+      <form action="" ng-submit="doLogin()">
         <div class="list">
+          <div class = "col header text-center">
+            <img src="./img/ionic.png" class= "logo"/>
+          </div>
           <label class="item item-input">
             <span class="input-label">Username</span>
             <input type="text" ng-model="loginData.username">
@@ -26,6 +29,23 @@
             <button class="button button-block button-positive" type="submit">Log in</button>
           </label>
         </div>
+
+        <label class="item">
+          <button class=" button button-block button-positive" ng-click="fbLogin()">
+            Login with Facebook
+          </button>
+        </label>
+
+        <!-- this(bellow) is a facebook img that i didn't know how to make it clickable, so I changed to a facebook buton(above). -->
+            <!-- <div class = "col button-row text-center">
+               <img src="./img/facebook-button.png" ng-click=""/>
+            </div> -->
+            <!-- <div class = "col button-row">
+               <img src="./img/email-button.png" />
+            </div> -->
+            <div class = "col text-center">
+                Don't have an account? <strong><a href = "#">Sign up now!</a></strong>
+            </div>
       </form>
     </section>
   </ion-content>

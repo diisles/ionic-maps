@@ -1,7 +1,7 @@
-angular.module('starter')
+angular.module('starter', ['ngOpenFB'])
 
 .controller('LoginController', function($scope,
-$ionicModal, $timeout) {
+$ionicModal, $timeout, ngFB) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -28,17 +28,17 @@ $ionicModal, $timeout) {
 
   // Open the login modal
   $scope.login = function() {
-    $scope.moddal.show();
+    $scope.modal.show();
   };
 
   // perform the  login action when the user submits the login form
   $scope.doLogin = function() {
-    LoginService.loginUser($scope.data.username, $scope.data.password).succes(function(data){
-      $state.go('/map');
+    LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data){
+      $state.go('map');
     }).error(function(data){
       var alertPopup =$ionicPopup.alert({
         title: 'Login failed!',
-        template: 'Please check you credentials!'
+        template: 'Please check your credentials!'
       });
     });
     console.log('Log in time', $scope.loginData);
@@ -48,6 +48,18 @@ $ionicModal, $timeout) {
       $scope.closeLogin();
     }, 1000);
   };
+
+  $scope.fbLogin = function () {
+    ngFB.login({scope: 'email,read_stream,publish_actions'}).then(function(response){
+      if (response.status === 'connected'){
+        console.log('Facebook login succeeded');
+        $scope.closeLogin();
+      } else {
+        alert('Facebook login failed');
+      }
+    });
+  }
+
 })
 
 .controller('signUpCtrl', function($scope,$http,$state,$stateParams){
@@ -150,9 +162,9 @@ $ionicModal, $timeout) {
 //   };
 // }
 .controller('ToggleCtrl', function($scope,$ionicSideMenuDelegate) {
-  $scope.toggleLeft = function() {
+  $scope.toggleLeftSideMenu = function() {
     $ionicSideMenuDelegate.toggleLeft();
-  }
+  };
 })
 
 

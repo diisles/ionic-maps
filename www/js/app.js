@@ -4,9 +4,10 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'ngCordova'])
+angular.module('starter', ['ionic', 'ngCordova', 'ngOpenFB'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, ngFB) {
+  ngFB.init({appId:'514183322112467'});
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -25,6 +26,12 @@ angular.module('starter', ['ionic', 'ngCordova'])
   .state('welcome',{
     url: '/welcome',
     templateUrl: 'templates/welcome.html',
+    // controller: 'signUpCtrl'
+  })
+
+  .state('settings',{
+    url: '/settings',
+    templateUrl: 'templates/settings.html',
     // controller: 'signUpCtrl'
   })
 
@@ -72,7 +79,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 
 
 
-  $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise("/login");
 
 })
 

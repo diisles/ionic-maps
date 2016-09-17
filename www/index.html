@@ -27,20 +27,26 @@
     <!-- <script type="text/javascript"> -->
     <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="lib/angular-socket-io/socket.js"></script>
+
+    <!-- include openfb.js and ngopenfb.js> -->
+    <script src="js/openfb.js"></script>
+    <script src="js/ngopenfb.js"></script>
+
   </head>
-  <body ng-app="starter">
 
-    <ion-pane>
+  <body>
+
+    <!-- <ion-pane> -->
 
 
+      <ion-side-menus>
 
-      <ion-side-menus enable-menu-with-back-views="false">
-        <ion-side-menu-content>
-          <ion-nav-bar class="bar-stable">
-            <ion-nav-back-button>
-            </ion-nav-back-button>
+        <ion-pane ion-side-menu-conten>
+          <ion-nav-bar class="bar-positive nav-title-slide-ios7">
+            <ion-nav-back-button class="button-icon"><span class="icon ion-ios7-arrow-left"></span></ion-nav-back-button>
+            </ion-nav-bar>
 
-            <ion-nav-buttons side="left">
+            <!-- <ion-nav-buttons side="left">
               <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
               </button>
             </ion-nav-buttons>
@@ -50,37 +56,42 @@
 
         <ion-side-menu side="left">
           <ion-header-bar class="bar-stable">
-            <h1 class="title">Left</h1>
+            <h1 class="title">Settings</h1>
           </ion-header-bar>
-          <ion-content>
+          <ion-side-menu-content>
             <ion-list>
-              <ion-item menu-close="" ng-click="login">
-                Modal
+              <ion-item menu-close="" ng-click="toggleLeftSideMenu()">
+                Request Gas
               </ion-item>
               <ion-item menu-close="" href="#/app/search">
-                Search
+                Account
               </ion-item>
               <ion-item menu-close="" href="#/app/browse">
-                Browse
+                Orders
               </ion-item>
               <ion-item menu-close="" href="#/app/playlists">
-                Playlists
+                Vehicles
               </ion-item>
             </ion-list>
-          </ion-content>
+          </ion-side-menu-content>
         </ion-side-menu>
-      </ion-side-menus>
+      </ion-side-menus> -->
 
 
-      <!-- <ion-header-bar class="bar-stable">
-        <h1 class="title">Maps</h1>
-      </ion-header-bar> -->
-      <!-- <ion-view>
-      <ion-content>
-          <div id="map" data-tap-disabled="true"></div>
-      </ion-content>
-      </ion-view> -->
       <ion-nav-view></ion-nav-view>
     </ion-pane>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar  bar-header bar-dark"></ion-header-bar>
+    <ion-content has-header="true">
+      <ion-list>
+        <ion-item href="#/" menu-close>Home</ion-item>
+          <ion-item href="#/about" menu-close>About</ion-item>
+      </ion-list>
+
+    </ion-content>
+
+  </ion-side-menu>
+
   </body>
 </html>
