@@ -167,7 +167,51 @@ $ionicModal, $timeout, ngFB) {
   };
 })
 
+.controller('TabsCtrl', function($scope, $ionicSideMenuDelegate){
+  $scope.openMenu = function() {
+    $ionicSideMenuDelegate.toggleLeft();
+  }
+});
 
+.controller('HomeTabCtrl', function($scope, $ionicSideMenuDelegate){
+
+});
+
+.controller('AboutCtrl', function($scope, $ionicSideMenuDelegate){
+  $scope.openMenu = function(){
+    $ionicSideMenuDelegate.toggleLeft();
+  }
+});
+
+.controller('AccountCtrl', function($scope, $ionicSideMenuDelegate){
+  $scope.openMenu = function(){
+    $ionicSideMenuDelegate.toggleLeft();
+  }
+});
+
+.controller('GetGasCtrl', function($scope, $ionicSideMenuDelegate){
+  $scope.openMenu = function(){
+    $ionicSideMenuDelegate.toggleLeft();
+  }
+});
+
+.controller('HelpCtrl', function($scope, $ionicSideMenuDelegate){
+  $scope.openMenu = function(){
+    $ionicSideMenuDelegate.toggleLeft();
+  }
+});
+
+.controller('OrdersCtrl', function($scope, $ionicSideMenuDelegate){
+  $scope.openMenu = function(){
+    $ionicSideMenuDelegate.toggleLeft();
+  }
+});
+
+.controller('VehiclesCtrl', function($scope, $ionicSideMenuDelegate){
+  $scope.openMenu = function(){
+    $ionicSideMenuDelegate.toggleLeft();
+  }
+});
 
 
 
