@@ -4,7 +4,10 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'ngCordova', 'ngOpenFB'])
+angular.module('starter', ['ionic', 'ngSanitize','ngCordova','ngOpenFB','btford.socket-io'])
+
+
+// angular.module('starter', ['ionic', 'ngCordova', 'ngOpenFB'])
 
 .run(function($ionicPlatform, ngFB) {
   ngFB.init({appId:'514183322112467'});

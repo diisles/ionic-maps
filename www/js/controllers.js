@@ -1,68 +1,65 @@
-angular.module('starter', ['ngOpenFB'])
-
-.controller('LoginController', function($scope, LoginService, $state,
-  $ionicModal, $timeout, ngFB) {
+angular.module('starter')
+  .controller('LoginController', function($scope, LoginService, $state, $ionicModal, $timeout, ngFB) {
     console.log('is this running');
 
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+    // With the new view caching in Ionic, Controllers are only called
+    // when they are recreated or on app start, instead of every page change.
+    // To listen for when this page is active (for example, to refresh data),
+    // listen for the $ionicView.enter event:
+    //$scope.$on('$ionicView.enter', function(e) {
+    //});
 
+    // Form data for login Modal
+    $scope.data = {};
 
-  // Form data for login Modal
-  $scope.data = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
+    // Create the login modal that we will use later
+    $ionicModal.fromTemplateUrl('templates/login.html', {
       scope: $scope
-  }).then(function(modal){
+    }).then(function(modal){
       $scope.modal = modal;
-  });
+    });
 
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function(){
-    $scope.modal.hide();
-  };
+    // Triggered in the login modal to close it
+    $scope.closeLogin = function(){
+      $scope.modal.hide();
+    };
 
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show()
-      console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
-  };
+    // Open the login modal
+    $scope.login = function() {
+      $scope.modal.show()
+        // console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
+    };
 
-  // perform the  login action when the user submits the login form
-  $scope.doLogin = function() {
-    LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data){
-      $state.go('map');
-    }).error(function(data){
-      var alertPopup =$ionicPopup.alert({
-        title: 'Login failed!',
-        template: 'Please check your credentials!'
+    // perform the  login action when the user submits the login form
+    $scope.doLogin = function() {
+      LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data){
+        $state.go('map');
+      }).error(function(data){
+        var alertPopup =$ionicPopup.alert({
+          title: 'Login failed!',
+          template: 'Please check your credentials!'
+        });
       });
-    });
-    console.log('Log in time', $scope.loginData);
+      console.log('Log in time', $scope.loginData);
 
-    // Simulate a login delay. Remove this and replace with your login// code if using a login system
-    $timeout(function(){
-      $scope.closeLogin();
-    }, 1000);
-  };
-
-  $scope.fbLogin = function () {
-    ngFB.login({scope: 'email,read_stream,publish_actions'}).then(function(response){
-      if (response.status === 'connected'){
-        console.log('Facebook login succeeded');
+      // Simulate a login delay. Remove this and replace with your login// code if using a login system
+      $timeout(function(){
         $scope.closeLogin();
-      } else {
-        alert('Facebook login failed');
-      }
-    });
-  }
+      }, 1000);
+    };
 
-})
+    $scope.fbLogin = function () {
+      ngFB.login({scope: 'email,read_stream,publish_actions'}).then(function(response){
+        if (response.status === 'connected'){
+          console.log('Facebook login succeeded');
+          $scope.closeLogin();
+        } else {
+          alert('Facebook login failed');
+        }
+      });
+    }
+
+  })
 
 .controller('signUpCtrl', function($scope,$http,$state,$stateParams){
   $scope.userForm = {};
