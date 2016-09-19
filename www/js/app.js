@@ -4,9 +4,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'ngCordova'])
+angular.module('starter', ['ionic', 'ngSanitize','ngCordova','ngOpenFB','btford.socket-io'])
 
-.run(function($ionicPlatform) {
+
+// angular.module('starter', ['ionic', 'ngCordova', 'ngOpenFB'])
+
+.run(function($ionicPlatform, ngFB) {
+  ngFB.init({appId:'514183322112467'});
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -28,6 +32,12 @@ angular.module('starter', ['ionic', 'ngCordova'])
     // controller: 'signUpCtrl'
   })
 
+  .state('settings',{
+    url: '/settings',
+    templateUrl: 'templates/settings.html',
+    // controller: 'signUpCtrl'
+  })
+
   .state('member-signup', {
     url: '/signup',
     templateUrl: 'templates/member-signup.html',
@@ -35,7 +45,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
   })
 
   .state('driver-signup', {
-    url: '/signup',
+    url: '/driversignup',
     templateUrl: 'templates/driver-signup.html',
     controller: 'signUpCtrl'
   })
@@ -48,7 +58,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 
   .state('login', {
     url: '/login',
-    templateUrl: './templates/login.html',
+    templateUrl: 'templates/login.html',
     controller: 'LoginController'
   })
 
@@ -70,9 +80,51 @@ angular.module('starter', ['ionic', 'ngCordova'])
     controller: 'DriversController'
   })
 
+  .state('tabs', {
+    url: '/tab',
+    templateUrl: 'templates/tabs.html',
+    controller: 'TabsCtrl'
+  })
+
+  .state('tab.87', {
+    url: '/87',
+    views: {
+      '87-tab': {
+        templateUrl: 'templates/tab-87.html',
+        controller: '87TabCtrl'
+      }
+    }
+  })
+
+  .state('tab.89', {
+    url: '/89',
+    views: {
+      '89-tab': {
+        templateUrl: 'templates/tab-89.html',
+        controller: '89TabCtrl'
+      }
+    }
+  })
+
+  .state('tab.91', {
+    url: '/91',
+    views: {
+      '91-tab': {
+        templateUrl: 'templates/tab-91.html',
+        controller: '91TabCtrl'
+      }
+    }
+  })
+
+  .state('about', {
+    url:'/about',
+    controller: 'AboutCtrl',
+    templateUrl: 'templates/about.html'
+  })
 
 
-  $urlRouterProvider.otherwise("/");
+
+  $urlRouterProvider.otherwise("/login");
 
 })
 
