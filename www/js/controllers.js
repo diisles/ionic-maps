@@ -1,7 +1,8 @@
 angular.module('starter', ['ngOpenFB'])
 
-.controller('LoginController', function($scope,
-$ionicModal, $timeout, ngFB) {
+.controller('LoginController', function($scope, LoginService, $state,
+  $ionicModal, $timeout, ngFB) {
+    console.log('is this running');
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -12,13 +13,13 @@ $ionicModal, $timeout, ngFB) {
 
 
   // Form data for login Modal
-  $scope.loginData = {};
+  $scope.data = {};
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
+      scope: $scope
   }).then(function(modal){
-    $scope.modal = modal;
+      $scope.modal = modal;
   });
 
   // Triggered in the login modal to close it
@@ -28,7 +29,8 @@ $ionicModal, $timeout, ngFB) {
 
   // Open the login modal
   $scope.login = function() {
-    $scope.modal.show();
+    $scope.modal.show()
+      console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
   };
 
   // perform the  login action when the user submits the login form
@@ -83,7 +85,7 @@ $ionicModal, $timeout, ngFB) {
       alert('User added to Users list:' + $scope.userForm.item)
       $scope.userForm.item = ""
     }
-  }
+  };
 })
 
 
@@ -170,48 +172,171 @@ $ionicModal, $timeout, ngFB) {
 .controller('TabsCtrl', function($scope, $ionicSideMenuDelegate){
   $scope.openMenu = function() {
     $ionicSideMenuDelegate.toggleLeft();
-  }
-});
+  };
+})
 
-.controller('HomeTabCtrl', function($scope, $ionicSideMenuDelegate){
-
-});
+// .controller('HomeTabCtrl', function($scope, $ionicSideMenuDelegate){
+//
+// });
 
 .controller('AboutCtrl', function($scope, $ionicSideMenuDelegate){
   $scope.openMenu = function(){
     $ionicSideMenuDelegate.toggleLeft();
-  }
-});
+  };
+})
 
 .controller('AccountCtrl', function($scope, $ionicSideMenuDelegate){
   $scope.openMenu = function(){
     $ionicSideMenuDelegate.toggleLeft();
-  }
-});
+  };
+})
 
 .controller('GetGasCtrl', function($scope, $ionicSideMenuDelegate){
   $scope.openMenu = function(){
     $ionicSideMenuDelegate.toggleLeft();
-  }
-});
+  };
+})
 
 .controller('HelpCtrl', function($scope, $ionicSideMenuDelegate){
   $scope.openMenu = function(){
     $ionicSideMenuDelegate.toggleLeft();
-  }
-});
+  };
+})
 
 .controller('OrdersCtrl', function($scope, $ionicSideMenuDelegate){
   $scope.openMenu = function(){
     $ionicSideMenuDelegate.toggleLeft();
-  }
-});
+  };
+})
 
 .controller('VehiclesCtrl', function($scope, $ionicSideMenuDelegate){
   $scope.openMenu = function(){
     $ionicSideMenuDelegate.toggleLeft();
-  }
-});
+  };
+})
+
+
+.controller('91TabCtrl', function($scope, $state, $cordovaGeolocation) {
+  var options = {timeout: 10000, enableHighAccuracy: true};
+
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+    var mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    //Wait until the map is loaded
+    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+
+      var marker = new google.maps.Marker({
+          map: $scope.map,
+          animation: google.maps.Animation.DROP,
+          position: latLng
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+          content: "Fill me Up!"
+      });
+
+      google.maps.event.addListener(marker, 'click', function () {
+          infoWindow.open($scope.map, marker);
+      });
+
+    });
+
+  }, function(error){
+    console.log("Could not get location");
+  })
+})
+
+
+.controller('89TabCtrl', function($scope, $state, $cordovaGeolocation) {
+  var options = {timeout: 10000, enableHighAccuracy: true};
+
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+    var mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    //Wait until the map is loaded
+    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+
+      var marker = new google.maps.Marker({
+          map: $scope.map,
+          animation: google.maps.Animation.DROP,
+          position: latLng
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+          content: "Fill me Up!"
+      });
+
+      google.maps.event.addListener(marker, 'click', function () {
+          infoWindow.open($scope.map, marker);
+      });
+
+    });
+
+  }, function(error){
+    console.log("Could not get location");
+  })
+})
+
+
+.controller('87TabCtrl', function($scope, $state, $cordovaGeolocation) {
+  var options = {timeout: 10000, enableHighAccuracy: true};
+
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+    var mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    //Wait until the map is loaded
+    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+
+      var marker = new google.maps.Marker({
+          map: $scope.map,
+          animation: google.maps.Animation.DROP,
+          position: latLng
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+          content: "Fill me Up!"
+      });
+
+      google.maps.event.addListener(marker, 'click', function () {
+          infoWindow.open($scope.map, marker);
+      });
+
+    });
+
+  }, function(error){
+    console.log("Could not get location");
+  });
+})
+
+
+
 
 
 
@@ -251,5 +376,5 @@ $ionicModal, $timeout, ngFB) {
 
   }, function(error){
     console.log("Could not get location");
-  });
+  })
 });
