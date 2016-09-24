@@ -1,5 +1,5 @@
 angular.module('starter')
-  .controller('LoginController', function($scope, LoginService, $state, $ionicModal, $timeout, ngFB) {
+  .controller('LoginController', function($scope, LoginService, $ionicPopup, $state, $ionicModal, $timeout, ngFB) {
     console.log('is this running');
 
     // With the new view caching in Ionic, Controllers are only called
@@ -13,29 +13,32 @@ angular.module('starter')
     $scope.data = {};
 
     // Create the login modal that we will use later
-    $ionicModal.fromTemplateUrl('templates/login.html', {
-      scope: $scope
-    }).then(function(modal){
-      $scope.modal = modal;
-    });
+    // $ionicModal.fromTemplateUrl('templates/login.html', {
+    //   scope: $scope
+    // }).then(function(modal){
+    //   $scope.modal = modal;
+    // });
+
 
     // Triggered in the login modal to close it
     $scope.closeLogin = function(){
-      $scope.modal.hide();
+    //
+    //   // greyed out bellow code because cosole eror stating could not find "hide".
+    //
+    //   // $scope.modal.hide();
     };
-
     // Open the login modal
-    $scope.login = function() {
-      $scope.modal.show()
-        // console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
-    };
+    // $scope.login = function() {
+    //   $scope.modal.show()
+    //     // console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
+    // };
 
     // perform the  login action when the user submits the login form
-    $scope.doLogin = function() {
+    $scope.login = function() {
       LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data){
         $state.go('map');
       }).error(function(data){
-        var alertPopup =$ionicPopup.alert({
+        var alertPopup = $ionicPopup.alert({
           title: 'Login failed!',
           template: 'Please check your credentials!'
         });
@@ -43,15 +46,19 @@ angular.module('starter')
       console.log('Log in time', $scope.loginData);
 
       // Simulate a login delay. Remove this and replace with your login// code if using a login system
-      $timeout(function(){
-        $scope.closeLogin();
-      }, 1000);
+      // $timeout(function(){
+      //   $scope.closeLogin();
+      // }, 1000);
     };
 
     $scope.fbLogin = function () {
       ngFB.login({scope: 'email,read_stream,publish_actions'}).then(function(response){
         if (response.status === 'connected'){
-          console.log('Facebook login succeeded');
+
+          console.log('Facebook login succeeded')
+          .then(function(response){
+            $state.go('map')
+          })
           $scope.closeLogin();
         } else {
           alert('Facebook login failed');

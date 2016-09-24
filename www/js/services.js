@@ -5,11 +5,11 @@ angular.module('starter')
 // simple login method markup found on devdactic by Simon.
 .service('LoginService', function($q) {
   return {
-    loginUser: function(name, password) {
+    loginUser: function(name, pw) {
       var deferred = $q.defer();
       var promise = deferred.promise;
 
-        if (name == 'user' && password == 'secret') {
+        if (name == 'user' && pw == 'secret') {
                 deferred.resolve('Welcome ' + name + '!');
           } else {
                 deferred.reject('Wrong credentials.');
