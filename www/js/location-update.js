@@ -25,7 +25,7 @@ function refreshMarker(){
         //If we ahven't recieved any update from the user
         // We remove the marker of mising user
         if(userInfo.id != curentUserInfo.id &&
-        userInfo.timestamp + 1000*20 < new Date().getTime()){
+        userInfo.timestamp + 1000*5 < new Date().getTime()){
         userInfo.marker.setMap(null);
         delete users[id];
         continue;
@@ -48,9 +48,9 @@ function refreshMarker(){
 
 }
 
-//Refresh the markers every 20 seconds
+//Refresh the markers every 5 seconds
 clearTimeout(refreshTimeout)
-refreshTimeout = setTimeout(refreshMarkers, 1000*20);
+refreshTimeout = setTimeout(refreshMarkers, 1000*5);
 
 }
 

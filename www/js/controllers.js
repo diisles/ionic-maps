@@ -347,38 +347,109 @@ angular.module('starter')
 .controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
   var options = {timeout: 10000, enableHighAccuracy: true};
 
-  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+  var webSocket, myMap;
+  var markers =  {};
 
-    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  function initialize(mapContainer) {
+    // Here we create a new connection, but you can reuse a existing one
+    webSocket = io.connect("http://localhost:3000");
 
+    // Creating google map
     var mapOptions = {
       center: latLng,
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    myMap = new google.maps.Map(document.getElementById("mapContainer"), mapOptions);
 
-    //Wait until the map is loaded
-    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+    webSocket.on('location update', updateMarker);
+    webSocket.on('user disconnected', removeMarker);
+    websocket.emit('request locations', loadMarkers);
+  }
 
-      var marker = new google.maps.Marker({
-          map: $scope.map,
-          animation: google.maps.Animation.DROP,
-          position: latLng
-      });
+  function updateMarker(data) {
+    var marker = markers[data.key];
+    if(marker) {
+      marker.setPosition(new google.maps.LatLng(data.lat,data.lng));
+    } else {
+      markers[data.key] = getMarker(data.lat, data.lng, data.name);
+    }
+  }
 
-      var infoWindow = new google.maps.InfoWindow({
-          content: "Fill me Up!"
-      });
+  function removeMarker(key){
+    var marker = markers[key];
+    if(marker){
+      marker.setMap(null);
+      delete markers[key];
+    }
+  }
 
-      google.maps.event.addListener(marker, 'click', function () {
-          infoWindow.open($scope.map, marker);
-      });
+  function loadMarkers(data) {
+    for(key in data) {
+      var user = data[key];
+      markers[key] = getMarker(user.lat, user.lng, user.name);
+    }
+  }
 
+  function getMarker(lat, lng, label) {
+    return new google.maps.Marker({
+      title: label,
+      map: myMap,
+      position: new google.maps.LatLng(lat,lng)
     });
+  }
 
-  }, function(error){
-    console.log("Could not get location");
-  })
-});
+  function tryGeolocation(){
+    if(navigator.geolocation) {
+      navigation.geolocation.getCurrentPosition(sendLocation, errorHandler);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  function sendLocation(position) {
+  var data = {
+    lat : position.coords.latitude,
+    lng : position.coords.longitude,
+  }
+  webSocket.emit("send location", data);
+
+}
+
+  function errorHandler(error) {
+    alert('Eror detecting your location');
+  }
+})
+
+
+
+//   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+//
+//     var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+//
+//     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+//
+//     //Wait until the map is loaded
+//     google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+//
+//       var marker = new google.maps.Marker({
+//           map: $scope.map,
+//           animation: google.maps.Animation.DROP,
+//           position: latLng
+//       });
+//
+//       var infoWindow = new google.maps.InfoWindow({
+//           content: "Fill me Up!"
+//       });
+//
+//       google.maps.event.addListener(marker, 'click', function () {
+//           infoWindow.open($scope.map, marker);
+//       });
+//
+//     });
+//
+//   }, function(error){
+//     console.log("Could not get location");
+//   })
+// });
