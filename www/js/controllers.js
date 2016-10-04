@@ -344,7 +344,7 @@ angular.module('starter')
 
 
 
-.controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
+.controller('MapCtrl', function($scope, webSocket, $state, $cordovaGeolocation) {
   var options = {timeout: 10000, enableHighAccuracy: true};
 
   var webSocket, myMap;

@@ -23,7 +23,7 @@ angular.module('starter', ['ionic', 'ngSanitize','ngCordova','ngOpenFB','btford.
   })
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider,) {
 
   $stateProvider
   .state('welcome',{

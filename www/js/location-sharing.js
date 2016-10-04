@@ -17,8 +17,9 @@ function initLocationSharing(location_callback, error_callback){
     // ================================
     // Setup Socket IO
     // ================================
-    var socket = io.connect('http://locahost:8100/');
-    socket.on('connect', function () {
+    var io = require('socket.io-client');
+    var socket = io.connect('http://locahost:3000/');
+    socket.on('connect', function (socket) {
         socket.on('location', function(location){
             if(location.id != userInfo.id) {
                 location_callback(location);
