@@ -1,5 +1,5 @@
 angular.module('starter')
-  .controller('LoginController', function($scope, LoginService, $ionicPopup, $state, $ionicModal, $timeout, ngFB) {
+  .controller('LoginController', function($scope, LoginService, $ionicPopup, $state, $sanitize, $ionicModal, $timeout, ngFB, btford.socket-io ) {
     console.log('is this running');
 
     // With the new view caching in Ionic, Controllers are only called
