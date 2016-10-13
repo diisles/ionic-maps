@@ -6,14 +6,14 @@
 
 angular.module('starter', ['ionic', 'ngSanitize','ngCordova','ngOpenFB','btford.socket-io'])
 
-var io = require('socket.io-client');
-var socket = io.connect('http://localhost:3000', {reconnect: true});
+// var io = require('socket.io-client');
+// var socket = io.connect('http://localhost:3000', {reconnect: true});
 
-// Add a connect listener
-socket.on('connect', function (socket) {
-    console.log('Connected!');
-});
-socket.emit('CH01', 'me', 'test msg');
+// // Add a connect listener
+// socket.on('connect', function (socket) {
+//     console.log('Connected!');
+// });
+// socket.emit('CH01', 'me', 'test msg')
 
 
 // angular.module('starter', ['ionic', 'ngCordova', 'ngOpenFB'])
@@ -29,10 +29,10 @@ socket.emit('CH01', 'me', 'test msg');
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-  })
+  });
 })
 
-.config(function($stateProvider, $urlRouterProvider,) {
+.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
   .state('welcome',{

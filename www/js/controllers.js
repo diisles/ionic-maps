@@ -1,5 +1,5 @@
 angular.module('starter')
-  .controller('LoginController', function($scope, LoginService, $ionicPopup, $state, $sanitize, $ionicModal, $timeout, ngFB, btford.socket-io ) {
+  .controller('LoginController', function($scope, LoginService, $ionicPopup, $state, $sanitize, $ionicModal, $timeout, ngFB) {
     console.log('is this running');
 
     // With the new view caching in Ionic, Controllers are only called
@@ -344,15 +344,15 @@ angular.module('starter')
 
 
 
-.controller('MapCtrl', function($scope, webSocket, $state, $cordovaGeolocation) {
+.controller('MapCtrl', function($scope, socket, $state, $cordovaGeolocation) {
   var options = {timeout: 10000, enableHighAccuracy: true};
 
-  var webSocket, myMap;
+  var mySocket, myMap;
   var markers =  {};
 
   function initialize(mapContainer) {
     // Here we create a new connection, but you can reuse a existing one
-    webSocket = io.connect("http://localhost:3000");
+    // socket = io.connect("http://localhost:3000");
 
     // Creating google map
     var mapOptions = {
@@ -363,9 +363,9 @@ angular.module('starter')
 
     myMap = new google.maps.Map(document.getElementById("mapContainer"), mapOptions);
 
-    webSocket.on('location update', updateMarker);
-    webSocket.on('user disconnected', removeMarker);
-    websocket.emit('request locations', loadMarkers);
+    socket.on('location update', updateMarker);
+    socket.on('user disconnected', removeMarker);
+    socket.emit('request locations', loadMarkers);
   }
 
   function updateMarker(data) {
@@ -413,7 +413,7 @@ angular.module('starter')
     lat : position.coords.latitude,
     lng : position.coords.longitude,
   }
-  webSocket.emit("send location", data);
+  socket.emit("send location", data);
 
 }
 

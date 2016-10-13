@@ -12,7 +12,7 @@
 
 
 
-var socket = require('socket.io-client')('http://localhost3000');
+// var socket = require('socket.io-client')('http://localhost3000')
 var user =  {};
 var usersCount, messagesList, messageBox, sendButton, webSocket;
 
