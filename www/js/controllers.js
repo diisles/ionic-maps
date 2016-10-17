@@ -347,7 +347,7 @@ angular.module('starter')
 .controller('MapCtrl', function($scope, socket, $state, $cordovaGeolocation) {
   var options = {timeout: 10000, enableHighAccuracy: true};
 
-  var mySocket, myMap;
+  var socket, myMap;
   var markers =  {};
 
   function initialize(mapContainer) {

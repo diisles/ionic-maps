@@ -6,7 +6,7 @@
  * @author Christophe Coenraets @ccoenraets
  * @version 0.5
  */
-angular.module('ngOpenFB', [])
+angular.module('ngOpenFB',[])
 
     .factory('ngFB', function ($q, $window) {
 
