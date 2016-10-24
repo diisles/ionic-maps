@@ -96,7 +96,7 @@ angular.module('starter')
 
 
 
-.controller('UserCtrl', function($scope,$http,$state,$stateParams){
+.controller('UserCtrl', function($scope,$http,$state,$stateParams,socket){
 
   $scope.user = [];
   $http.get('http://localhost:3000/users', {cache: true})
@@ -167,6 +167,119 @@ angular.module('starter')
 //     $ionicSideMenuDelegate.toggleLeft();
 //   };
 // }
+
+// This code bellow for chatctrl is from http://melvin0008.github.io/blog/ionic-socketio-chat/
+.controller('ChatController', function($stateParams,socket, $sanatize, $ionicScrollDelegate, $timeout){
+
+  var self=this;
+  var typing = false;
+  var lastTypingTime;
+  var TYPING_TIMER_LENGTH = 400;
+
+  // Add colors
+  var COLORS = [
+    '#e21400', '#91580f', '#f8a700', '#f78b00',
+     '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
+     '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
+  ];
+
+  //initializing messages array
+  self.messages=[]
+
+
+  socket.on('connect',function(){
+    connected = true
+    // Add user called nickname
+    socket.emit('add user', 'username');
+    })
+  socket.on('new message', function (data){
+    addMessaageToList(data.username,true,data.messaage)
+  });
+
+  //function called when user hits the send buttton
+  self.sendMessage=function(){
+    socket.emit('new message', self.message)
+    addMessageToList($stateParams.username,true,self.message)
+    socket.emit('stop typing');
+    self.message = ""
+  }
+
+  function addMessageToList(username,style_type,message){
+    username = $sanitize(username) //The input is sanitizedFor more info reach this link
+    var color = style_type ? getUsernameColor(username) : null //Get color for user
+    self.messages.push({content:$sanitize(message),style:style_type,username:username,color:color}) // Push the messages to the messages list.
+      $ionicScrollDelegate.scrollBottom();// Scroll to the bottom to read the latest.
+    }
+
+    // Whenever the server emits 'user joined', log it in the chat body
+    socket.on('user joined', function (data) {
+      addMessageToList("",false,data.username + " joined")
+      addMessageToList("",false,message_string(data.numUsers))
+    });
+
+    // Whenever the server emits 'user left', log it in the chat body
+    socket.on('user left', function (data) {
+      addMessageToList("",false,data.username+" left")
+      addMessageToList("",false,message_string(data.numUsers))
+    });
+
+  // Return message string depending on the number of users
+    function message_string(number_of_users)
+    {
+      return number_of_users === 1 ? "there's 1 participant":"there are " + number_of_users + " participants"
+    }
+
+    //Whenever the server emits 'typing', show the typing message
+    socket.on('typing', function (data) {
+      addChatTyping(data);
+    });
+
+    // Whenever the server emits 'stop typing', kill the typing message
+    socket.on('stop typing', function (data) {
+      removeChatTyping(data.username);
+    });
+
+  // Adds the visual chat typing message
+  function addChatTyping (data) {
+      addMessageToList(data.username,true," is typing");
+  }
+
+  // Removes the visual chat typing message
+  function removeChatTyping (username) {
+      self.messages = self.messages.filter(function(element){return element.username != username || element.content != " is typing"})
+  }
+
+  // Updates the typing event
+      function sendUpdateTyping(){
+        if(connected){
+            if (!typing) {
+                typing = true;
+                socket.emit('typing');
+            }
+        }
+        lastTypingTime = (new Date()).getTime();
+        $timeout(function () {
+            var typingTimer = (new Date()).getTime();
+            var timeDiff = typingTimer - lastTypingTime;
+            if (timeDiff >= TYPING_TIMER_LENGTH && typing) {
+              socket.emit('stop typing');
+              typing = false;
+            }
+            }, TYPING_TIMER_LENGTH)
+      }
+
+
+
+
+
+  })
+
+
+
+
+
+
+
 .controller('ToggleCtrl', function($scope,$ionicSideMenuDelegate) {
   $scope.toggleLeftSideMenu = function() {
     $ionicSideMenuDelegate.toggleLeft();
@@ -245,7 +358,7 @@ angular.module('starter')
       });
 
       var infoWindow = new google.maps.InfoWindow({
-          content: "Fill me Up!"
+          content: "test!"
       });
 
       google.maps.event.addListener(marker, 'click', function () {
@@ -285,7 +398,7 @@ angular.module('starter')
       });
 
       var infoWindow = new google.maps.InfoWindow({
-          content: "Fill me Up!"
+          content: "test!"
       });
 
       google.maps.event.addListener(marker, 'click', function () {
@@ -325,7 +438,7 @@ angular.module('starter')
       });
 
       var infoWindow = new google.maps.InfoWindow({
-          content: "Fill me Up!"
+          content: "test!"
       });
 
       google.maps.event.addListener(marker, 'click', function () {
@@ -344,10 +457,10 @@ angular.module('starter')
 
 
 
-.controller('MapCtrl', function($scope, socket, $state, $cordovaGeolocation) {
+.controller('MapCtrl', function($scope, socket, $state, $cordovaGeolocation, $http) {
   var options = {timeout: 10000, enableHighAccuracy: true};
 
-  var socket, myMap;
+  var socket, map;
   var markers =  {};
 
   function initialize(mapContainer) {
@@ -355,13 +468,15 @@ angular.module('starter')
     // socket = io.connect("http://localhost:3000");
 
     // Creating google map
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
     var mapOptions = {
       center: latLng,
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    myMap = new google.maps.Map(document.getElementById("mapContainer"), mapOptions);
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
     socket.on('location update', updateMarker);
     socket.on('user disconnected', removeMarker);
@@ -395,7 +510,7 @@ angular.module('starter')
   function getMarker(lat, lng, label) {
     return new google.maps.Marker({
       title: label,
-      map: myMap,
+      map: $scope.map,
       position: new google.maps.LatLng(lat,lng)
     });
   }

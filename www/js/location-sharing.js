@@ -18,7 +18,7 @@
 //     // Setup Socket IO
 //     // ================================
 //     // var io = require('socket.io-client');
-//     // var socket = io.connect('http://locahost:3000/');
+//     // var socket = io.connect('http://localhost:3000/');
 //     // socket.on('connect', function (socket) {
 //     //     socket.on('location', function(location){
 //     //         if(location.id != userInfo.id) {

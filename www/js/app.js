@@ -6,6 +6,18 @@
 
 angular.module('starter', ['ionic', 'ngSanitize','ngCordova','ngOpenFB','btford.socket-io'])
 
+/////////////////////////////////////////////
+// This is from http://blog.ionic.io/handling-cors-issues-in-ionic/
+// Its to set up CORS but for now Im using the chrom plug in to do this
+// .constant('ApiEndpoint', {
+//   url: 'http://localhost:8100/api'
+// })
+// For the real endpoint, we'd use this
+// .constant('ApiEndpoint', {
+// url: 'http://cors.api.com/api'
+// })
+ ////////////////////////////////////////////
+
 // var io = require('socket.io-client');
 // var socket = io.connect('http://localhost:3000', {reconnect: true});
 
