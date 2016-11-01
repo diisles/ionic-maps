@@ -6,26 +6,26 @@
   <ion-content>
     <!-- <ion-radio ng-model="choice" ng-value="'A'">Sign-Up as a Member</ion-radio>
 <ion-radio ng-model="choice" ng-value="'B'">Sign-Up as a Driver</ion-radio> -->
-    <form action="" ng-submit="addUser()"><br>
+    <form action="" ng-submit="addDriver()"><br>
       <div class="list">
         <label class="item item-input">
           <span class="input-label">First Name: </span>
-          <input type="text" ng-model="userForm.firstName">
+          <input type="text" ng-model="driverForm.firstName">
         </label>
 
         <label class="item item-input">
           <span class="input-label">Last Name: </span>
-          <input type="text" ng-model="userForm.lastName">
+          <input type="text" ng-model="driverForm.lastName">
         </label>
 
         <label class="item item-input">
           <span class="input-label">Email: </span>
-          <input type="text" ng-model="userForm.email">
+          <input type="text" ng-model="driverForm.email">
         </label>
 
         <label class="item item-input">
           <span class="input-label">Phone Number: </span>
-          <input type="text" ng-model="userForm.tel">
+          <input type="text" ng-model="driverForm.tel">
         </label>
         <!-- <label class="item item-input">
           <span class="input-label">Phone Number: </span>
@@ -54,22 +54,22 @@
 
         <label class="item item-input">
           <span class="input-label">Vehicle Make: </span>
-          <input type="text" ng-model="userForm.vehicle.make">
+          <input type="text" ng-model="driverForm.vehicle.make">
         </label>
 
         <label class="item item-input">
           <span class="input-label">Vehicle Color: </span>
-          <input type="text" ng-model="userForm.vehicle.color">
+          <input type="text" ng-model="driverForm.vehicle.color">
         </label>
 
         <label class="item item-input">
           <span class="input-label">License Plate: </span>
-          <input type="text" ng-model="userForm.vehicle.licensePlate">
+          <input type="text" ng-model="driverForm.vehicle.licensePlate">
         </label>
 
         <label class="item item-input">
           <span class="input-label">Gas Type To Deliver: </span>
-          <input type="text" ng-model="userForm.vehicle.tier">
+          <input type="text" ng-model="driverForm.vehicle.tier">
         </label>
 
         <button type="submit" class="button button-block button-positive"> Sign Up</button>

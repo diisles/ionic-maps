@@ -4,8 +4,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'ngSanitize','ngCordova','ngOpenFB','btford.socket-io'])
+angular.module('starter', ['ionic', 'ngSanitize','ngCordova','ngOpenFB','btford.socket-io','starter.services','services'])
 
+.constant('ApiEndpoint', {
+  url: 'http://localhost:8100/api'
+})
 /////////////////////////////////////////////
 // This is from http://blog.ionic.io/handling-cors-issues-in-ionic/
 // Its to set up CORS but for now Im using the chrom plug in to do this
@@ -86,19 +89,19 @@ angular.module('starter', ['ionic', 'ngSanitize','ngCordova','ngOpenFB','btford.
   .state('users', {
     url: '/users',
     templateUrl: 'templates/users.html',
-    controller: 'UsersController'
+    controller: 'UserCtrl'
   })
 
   .state('user', {
     url: "/users/:id",
     templateUrl: "templates/users.html",
-    controller: "UserController"
+    controller: "UserCtrl"
   })
 
   .state('drivers', {
     url: '/drivers',
     templateUrl: 'templates/drivers.html',
-    controller: 'DriversController'
+    controller: 'DriverCtrl'
   })
 
   .state('tabs', {

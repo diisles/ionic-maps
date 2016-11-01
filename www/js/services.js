@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('services',[])
 //   factory('socket.io-client', function(socketFactory){
 //     return socketFactory();
 //   }).
@@ -11,7 +11,8 @@ angular.module('starter')
   var myIoSocket = io.connect('http://localhost:3000');
 
   mySocket = socketFactory({
-    ioSocket: myIoSocket
+    ioSocket: myIoSocket,
+    // path: '/stomp'
   });
 
   return mySocket;

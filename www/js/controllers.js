@@ -68,21 +68,23 @@ angular.module('starter')
 
   })
 
-.controller('signUpCtrl', function($scope,$http,$state,$stateParams){
+.controller('signUpCtrl', function($scope,$http,$state,$stateParams, ApiPost, ApiPostDrivers){
   $scope.userForm = {};
 
   $scope.addUser = function() {
     event.preventDefault();
-    if($scope.userForm.driver) {
-      $http.post('http://localhost:3000/drivers', $scope.userForm)
+    if($scope.userForm.driver){
+      ApiPostDrivers.postApiDataDrivers($scope.userForm)
+      // $http.post('http://localhost:3000/drivers', $scope.userForm)
       .then(function(response){
         $state.go('map')
       })
       alert('Driver added to Drivers list:' + $scope.userForm.item)
-      $scope.driverForm.item = ""
+      $scope.userForm.item = ""
 
     } else {
-      $http.post('http://localhost:3000/users', $scope.userForm)
+      ApiPost.postApiData($scope.userForm)
+      // $http.post('http://localhost:3000/users', $scope.userForm)
       .then(function(response){
         $state.go('map')
       })
@@ -96,13 +98,13 @@ angular.module('starter')
 
 
 
-.controller('UserCtrl', function($scope,$http,$state,$stateParams,socket){
-
+.controller('UserCtrl', function($scope,$http,$state,$stateParams, ApiEndpoint,socket){
   $scope.user = [];
-  $http.get('http://localhost:3000/users', {cache: true})
+  Api.getApiData()
   .then(function(response){
-    $scope.user = response.data
-  });
+    return $scope.user = response.data
+  })
+})
 
   // $scope.userForm = {}
   //
@@ -116,16 +118,21 @@ angular.module('starter')
   //   $scope.userForm.item = "")
   // }
 
-})
 
-.controller('DriverCtrl', function($scope,$http,$state, $stateParams){
-
+.controller('DriverCtrl',
+function($scope,$http,$state,$stateParams, ApiEndpoint,socket){
+  console.log('ApiEndpoint', ApiEndpoint)
+  var getApiData = function(){
   $scope.driver = [];
-  $http.get('http://localhost:3000/drivers', {cache: true})
+  return $http.get(ApiEnpoint.url + '/drivers')
   .then(function(response){
-    $scope.driver = response.data
-  });
-
+    return $scope.driver = response.data
+  })
+  };
+  return {
+    getApiData: getApiData
+  };
+})
   // $scope.driverForm = {}
   //
   // $scope.addDriverToDrivers = function (){
@@ -138,20 +145,24 @@ angular.module('starter')
   //   $scope.driverForm.item = "")
   //  }
 
-})
 
-.controller('TripCtrl', function($scope, $http,$state){
-
+.controller('TripCtrl', function($scope, $http,$state,ApiEndpoint){
+  var getApiData = function(){
   $scope.trip = [];
-  $http.get('http://loclhost:3000/trips', {cache:true})
+  $http.get(ApiEnpoint.url + '/trips', {cache:true})
   .then(function(response){
     $scope.trip = response.data
   });
+}
+  return {
+    getApiData: getApiData
+  };
+
   $scope.tripForm = {}
 
   $scope.addTripToTrips = function (){
     event.preventDefault()
-    $http.post('http://localhost:3000/trips', $scope.tripForm)
+    $http.post(ApiEnpoint.url + '/trips', $scope.tripForm)
     .then(function(response){
       $state.go('map')
     })
