@@ -3,8 +3,8 @@
   "app_id": "c1c40175",
   "proxies": [
     {
-      "path": "/api",
-      "proxyUrl": "http://localhost:3000/api/endpoint"
+      "path": "/",
+      "proxyUrl": "http://localhost:3000/"
     }
   ],
   "gulpStartupTasks": [

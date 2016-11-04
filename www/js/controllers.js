@@ -98,9 +98,9 @@ angular.module('starter')
 
 
 
-.controller('UserCtrl', function($scope,$http,$state,$stateParams, ApiEndpoint,socket){
+.controller('UserCtrl',      function($scope,$http,$state,$stateParams,  ApiGet,socket){
   $scope.user = [];
-  Api.getApiData()
+  ApiGet.getApiData($scope.userForm)
   .then(function(response){
     return $scope.user = response.data
   })
@@ -120,19 +120,14 @@ angular.module('starter')
 
 
 .controller('DriverCtrl',
-function($scope,$http,$state,$stateParams, ApiEndpoint,socket){
-  console.log('ApiEndpoint', ApiEndpoint)
-  var getApiData = function(){
+function($scope,$http,$state,$stateParams, ApiGetDrivers,ApiPostDrivers,socket){
   $scope.driver = [];
-  return $http.get(ApiEnpoint.url + '/drivers')
+  ApiGetDrivers.getApiDataDrivers($scope.userForm)
   .then(function(response){
     return $scope.driver = response.data
   })
-  };
-  return {
-    getApiData: getApiData
-  };
 })
+
   // $scope.driverForm = {}
   //
   // $scope.addDriverToDrivers = function (){

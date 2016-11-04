@@ -7,7 +7,7 @@
 angular.module('starter', ['ionic', 'ngSanitize','ngCordova','ngOpenFB','btford.socket-io','starter.services','services'])
 
 .constant('ApiEndpoint', {
-  url: 'http://localhost:8100/api'
+  url: 'http://localhost:3000'
 })
 /////////////////////////////////////////////
 // This is from http://blog.ionic.io/handling-cors-issues-in-ionic/

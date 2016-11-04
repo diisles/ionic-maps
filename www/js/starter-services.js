@@ -29,10 +29,10 @@ angular.module('starter.services', [])
 .factory('ApiPost', function($http, $q, ApiEndpoint) {
   console.log('ApiEndpoint', ApiEndpoint)
 
-  var postApiData = function() {
+  var postApiData = function(userData) {
     var q = $q.defer();
 
-     $http.post(ApiEndpoint.url + '/users')
+     $http.post(ApiEndpoint.url + '/users',userData)
       .success(function(data) {
         console.log('Post some data: ', data)
         q.resolve(data);
@@ -78,12 +78,12 @@ angular.module('starter.services', [])
 
 
 .factory('ApiPostDrivers', function($http, $q, ApiEndpoint) {
-  
 
-  var postApiDataDrivers = function() {
+
+  var postApiDataDrivers = function(userData) {
     var q = $q.defer();
 
-     $http.post(ApiEndpoint.url + '/drivers')
+     $http.post(ApiEndpoint.url + '/drivers',userData)
       .success(function(data) {
         console.log('Post some data: ', data)
         q.resolve(data);
