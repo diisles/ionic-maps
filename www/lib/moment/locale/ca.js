@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : catalan (ca)
 // author : Juan G. Hurtado : https://github.com/juanghurtado
@@ -12,6 +13,20 @@
     }
 }(function (moment) {
     return moment.defineLocale('ca', {
+=======
+//! moment.js locale configuration
+//! locale : catalan (ca)
+//! author : Juan G. Hurtado : https://github.com/juanghurtado
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+    var ca = moment.defineLocale('ca', {
+>>>>>>> master
         months : 'gener_febrer_març_abril_maig_juny_juliol_agost_setembre_octubre_novembre_desembre'.split('_'),
         monthsShort : 'gen._febr._mar._abr._mai._jun._jul._ag._set._oct._nov._des.'.split('_'),
         weekdays : 'diumenge_dilluns_dimarts_dimecres_dijous_divendres_dissabte'.split('_'),
@@ -22,8 +37,13 @@
             LTS : 'LT:ss',
             L : 'DD/MM/YYYY',
             LL : 'D MMMM YYYY',
+<<<<<<< HEAD
             LLL : 'D MMMM YYYY LT',
             LLLL : 'dddd D MMMM YYYY LT'
+=======
+            LLL : 'D MMMM YYYY H:mm',
+            LLLL : 'dddd D MMMM YYYY H:mm'
+>>>>>>> master
         },
         calendar : {
             sameDay : function () {
@@ -74,4 +94,11 @@
             doy : 4  // The week that contains Jan 4th is the first week of the year.
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return ca;
+
+}));
+>>>>>>> master

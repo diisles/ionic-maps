@@ -73,9 +73,14 @@ angular.module('starter')
 
   $scope.addUser = function() {
     event.preventDefault();
+<<<<<<< HEAD
     if($scope.userForm.driver){
       ApiPostDrivers.postApiDataDrivers($scope.userForm)
       // $http.post('http://localhost:3000/drivers', $scope.userForm)
+=======
+    if($scope.userForm.driver) {
+      $http.post('https://mysterious-coast-25984.herokuapp.com/drivers', $scope.userForm)
+>>>>>>> master
       .then(function(response){
         $state.go('map')
       })
@@ -83,13 +88,17 @@ angular.module('starter')
       $scope.userForm.item = ""
 
     } else {
+<<<<<<< HEAD
       ApiPost.postApiData($scope.userForm)
       // $http.post('http://localhost:3000/users', $scope.userForm)
+=======
+      $http.post('https://mysterious-coast-25984.herokuapp.com/users', $scope.userForm)
+>>>>>>> master
       .then(function(response){
         $state.go('map')
       })
-      alert('User added to Users list:' + $scope.userForm.item)
-      $scope.userForm.item = ""
+      alert('User added to Users list:' + $scope.userForm.username)
+      $scope.userForm = {}
     }
   };
 })
@@ -97,10 +106,18 @@ angular.module('starter')
 
 
 
+<<<<<<< HEAD
 
 .controller('UserCtrl',      function($scope,$http,$state,$stateParams,  ApiGet,socket){
   $scope.user = [];
   ApiGet.getApiData($scope.userForm)
+=======
+// hiiii
+.controller('UserCtrl', function($scope,$http,$state,$stateParams){
+
+  $scope.user = [];
+  $http.get('https://mysterious-coast-25984.herokuapp.com/users', {cache: true})
+>>>>>>> master
   .then(function(response){
     return $scope.user = response.data
   })
@@ -110,7 +127,7 @@ angular.module('starter')
   //
   // $scope.addUserToUsers = function (){
   //   event.preventDefault()
-  //   $http.post('http://localhost:3000/users', $scope.userForm)
+  //   $http.post('https://mysterious-coast-25984.herokuapp.com/users', $scope.userForm)
   //   .then(function(response){
   //     $state.go('map')
   //   })
@@ -122,7 +139,11 @@ angular.module('starter')
 .controller('DriverCtrl',
 function($scope,$http,$state,$stateParams, ApiGetDrivers,ApiPostDrivers,socket){
   $scope.driver = [];
+<<<<<<< HEAD
   ApiGetDrivers.getApiDataDrivers($scope.userForm)
+=======
+  $http.get('https://mysterious-coast-25984.herokuapp.com/drivers', {cache: true})
+>>>>>>> master
   .then(function(response){
     return $scope.driver = response.data
   })
@@ -135,7 +156,7 @@ function($scope,$http,$state,$stateParams, ApiGetDrivers,ApiPostDrivers,socket){
   //
   // $scope.addDriverToDrivers = function (){
   //   event.preventDefault()
-  //   $http.post('http://localhost:3000/drivers', $scope.driverForm)
+  //   $http.post('https://mysterious-coast-25984.herokuapp.com/drivers', $scope.driverForm)
   //   .then(function(response){
   //     $state.go('map')
   //   })
@@ -162,7 +183,11 @@ function($scope,$http,$state,$stateParams, ApiGetDrivers,ApiPostDrivers,socket){
 
   $scope.addTripToTrips = function (){
     event.preventDefault()
+<<<<<<< HEAD
     $http.post(ApiEnpoint.url + '/trips', $scope.tripForm)
+=======
+    $http.post('https://mysterious-coast-25984.herokuapp.com/trips', $scope.tripForm)
+>>>>>>> master
     .then(function(response){
       $state.go('map')
     })
@@ -325,6 +350,9 @@ function($scope,$http,$state,$stateParams, ApiGetDrivers,ApiPostDrivers,socket){
   };
 })
 
+
+.controller('MapCtrl', function($scope, $state, $cordovaGeolocation, $http, $interval) {
+
 .controller('HelpCtrl', function($scope, $ionicSideMenuDelegate){
   $scope.openMenu = function(){
     $ionicSideMenuDelegate.toggleLeft();
@@ -428,8 +456,17 @@ function($scope,$http,$state,$stateParams, ApiGetDrivers,ApiPostDrivers,socket){
 
 
 .controller('87TabCtrl', function($scope, $state, $cordovaGeolocation) {
+>>>>>>> socket
   var options = {timeout: 10000, enableHighAccuracy: true};
-
+  $scope.getAllUsers = function(){
+    $http.get('https://mysterious-coast-25984.herokuapp.com/users')
+    .then(function(data){
+      console.log(data)
+      // $interval(function(){
+      //   console.log('Yes')
+      // }, 1000)
+    })
+  }
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){
 
     var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -444,7 +481,45 @@ function($scope,$http,$state,$stateParams, ApiGetDrivers,ApiPostDrivers,socket){
 
     //Wait until the map is loaded
     google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+      var markers = []
+      function getUsers(){
+        $http.get('https://mysterious-coast-25984.herokuapp.com/users')
+        .then(function(data){
+          console.log(data)
+          var users = data.data.users
+          function clearOverlays(){
+            for (var i = 0; i < markers.length; i++){
+              markers[i].setMap(null);
+            }
+            markers = []
+          }
+          clearOverlays()
+          for(var i = 0; i<users.length; i++){
+            if(users[i].location) {
+              console.log(users[i].location)
+              var userLatLng = new google.maps.LatLng(users[i].location.y, users[i].location.x)
+// this code below sets a image that can be used as the marker for drivers.
+              var image = {
+    url: 'https://d30y9cdsu7xlg0.cloudfront.net/png/3306-200.png',
+     size: new google.maps.Size(71, 71),
+     origin: new google.maps.Point(0, 0),
+     anchor: new google.maps.Point(17, 34),
+     scaledSize: new google.maps.Size(25, 25)
+   };
 
+                var marker = new google.maps.Marker({
+                map: $scope.map,
+                icon: image,
+                animation: google.maps.Animation.BOUNCE,
+                position: userLatLng
+              })
+              markers.push(marker)
+            }
+
+          }
+        })
+      }
+      $interval(getUsers, 2000)
       var marker = new google.maps.Marker({
           map: $scope.map,
           animation: google.maps.Animation.DROP,

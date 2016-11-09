@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : bosnian (bs)
 // author : Nedim Cholich : https://github.com/frontyard
@@ -12,6 +13,20 @@
         factory((typeof global !== 'undefined' ? global : this).moment); // node or other global
     }
 }(function (moment) {
+=======
+//! moment.js locale configuration
+//! locale : bosnian (bs)
+//! author : Nedim Cholich : https://github.com/frontyard
+//! based on (hr) translation by Bojan Marković
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+>>>>>>> master
     function translate(number, withoutSuffix, key) {
         var result = number + ' ';
         switch (key) {
@@ -65,7 +80,11 @@
         }
     }
 
+<<<<<<< HEAD
     return moment.defineLocale('bs', {
+=======
+    var bs = moment.defineLocale('bs', {
+>>>>>>> master
         months : 'januar_februar_mart_april_maj_juni_juli_august_septembar_oktobar_novembar_decembar'.split('_'),
         monthsShort : 'jan._feb._mar._apr._maj._jun._jul._aug._sep._okt._nov._dec.'.split('_'),
         weekdays : 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split('_'),
@@ -73,16 +92,27 @@
         weekdaysMin : 'ne_po_ut_sr_če_pe_su'.split('_'),
         longDateFormat : {
             LT : 'H:mm',
+<<<<<<< HEAD
             LTS : 'LT:ss',
             L : 'DD. MM. YYYY',
             LL : 'D. MMMM YYYY',
             LLL : 'D. MMMM YYYY LT',
             LLLL : 'dddd, D. MMMM YYYY LT'
+=======
+            LTS : 'H:mm:ss',
+            L : 'DD. MM. YYYY',
+            LL : 'D. MMMM YYYY',
+            LLL : 'D. MMMM YYYY H:mm',
+            LLLL : 'dddd, D. MMMM YYYY H:mm'
+>>>>>>> master
         },
         calendar : {
             sameDay  : '[danas u] LT',
             nextDay  : '[sutra u] LT',
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
             nextWeek : function () {
                 switch (this.day()) {
                 case 0:
@@ -137,4 +167,11 @@
             doy : 7  // The week that contains Jan 1st is the first week of the year.
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return bs;
+
+}));
+>>>>>>> master

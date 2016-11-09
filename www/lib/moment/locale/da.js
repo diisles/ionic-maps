@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : danish (da)
 // author : Ulrik Nielsen : https://github.com/mrbase
@@ -12,6 +13,20 @@
     }
 }(function (moment) {
     return moment.defineLocale('da', {
+=======
+//! moment.js locale configuration
+//! locale : danish (da)
+//! author : Ulrik Nielsen : https://github.com/mrbase
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+    var da = moment.defineLocale('da', {
+>>>>>>> master
         months : 'januar_februar_marts_april_maj_juni_juli_august_september_oktober_november_december'.split('_'),
         monthsShort : 'jan_feb_mar_apr_maj_jun_jul_aug_sep_okt_nov_dec'.split('_'),
         weekdays : 'søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag'.split('_'),
@@ -19,11 +34,19 @@
         weekdaysMin : 'sø_ma_ti_on_to_fr_lø'.split('_'),
         longDateFormat : {
             LT : 'HH:mm',
+<<<<<<< HEAD
             LTS : 'LT:ss',
             L : 'DD/MM/YYYY',
             LL : 'D. MMMM YYYY',
             LLL : 'D. MMMM YYYY LT',
             LLLL : 'dddd [d.] D. MMMM YYYY LT'
+=======
+            LTS : 'HH:mm:ss',
+            L : 'DD/MM/YYYY',
+            LL : 'D. MMMM YYYY',
+            LLL : 'D. MMMM YYYY HH:mm',
+            LLLL : 'dddd [d.] D. MMMM YYYY HH:mm'
+>>>>>>> master
         },
         calendar : {
             sameDay : '[I dag kl.] LT',
@@ -55,4 +78,11 @@
             doy : 4  // The week that contains Jan 4th is the first week of the year.
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return da;
+
+}));
+>>>>>>> master

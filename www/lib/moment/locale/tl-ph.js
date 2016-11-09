@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : Tagalog/Filipino (tl-ph)
 // author : Dan Hagman
@@ -12,6 +13,20 @@
     }
 }(function (moment) {
     return moment.defineLocale('tl-ph', {
+=======
+//! moment.js locale configuration
+//! locale : Tagalog/Filipino (tl-ph)
+//! author : Dan Hagman
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+    var tl_ph = moment.defineLocale('tl-ph', {
+>>>>>>> master
         months : 'Enero_Pebrero_Marso_Abril_Mayo_Hunyo_Hulyo_Agosto_Setyembre_Oktubre_Nobyembre_Disyembre'.split('_'),
         monthsShort : 'Ene_Peb_Mar_Abr_May_Hun_Hul_Ago_Set_Okt_Nob_Dis'.split('_'),
         weekdays : 'Linggo_Lunes_Martes_Miyerkules_Huwebes_Biyernes_Sabado'.split('_'),
@@ -19,11 +34,19 @@
         weekdaysMin : 'Li_Lu_Ma_Mi_Hu_Bi_Sab'.split('_'),
         longDateFormat : {
             LT : 'HH:mm',
+<<<<<<< HEAD
             LTS : 'LT:ss',
             L : 'MM/D/YYYY',
             LL : 'MMMM D, YYYY',
             LLL : 'MMMM D, YYYY LT',
             LLLL : 'dddd, MMMM DD, YYYY LT'
+=======
+            LTS : 'HH:mm:ss',
+            L : 'MM/D/YYYY',
+            LL : 'MMMM D, YYYY',
+            LLL : 'MMMM D, YYYY HH:mm',
+            LLLL : 'dddd, MMMM DD, YYYY HH:mm'
+>>>>>>> master
         },
         calendar : {
             sameDay: '[Ngayon sa] LT',
@@ -57,4 +80,11 @@
             doy : 4  // The week that contains Jan 4th is the first week of the year.
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return tl_ph;
+
+}));
+>>>>>>> master

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : Marathi (mr)
 // author : Harshad Kale : https://github.com/kalehv
@@ -11,6 +12,19 @@
         factory((typeof global !== 'undefined' ? global : this).moment); // node or other global
     }
 }(function (moment) {
+=======
+//! moment.js locale configuration
+//! locale : Marathi (mr)
+//! author : Harshad Kale : https://github.com/kalehv
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+>>>>>>> master
     var symbolMap = {
         '1': '१',
         '2': '२',
@@ -36,7 +50,11 @@
         '०': '0'
     };
 
+<<<<<<< HEAD
     return moment.defineLocale('mr', {
+=======
+    var mr = moment.defineLocale('mr', {
+>>>>>>> master
         months : 'जानेवारी_फेब्रुवारी_मार्च_एप्रिल_मे_जून_जुलै_ऑगस्ट_सप्टेंबर_ऑक्टोबर_नोव्हेंबर_डिसेंबर'.split('_'),
         monthsShort: 'जाने._फेब्रु._मार्च._एप्रि._मे._जून._जुलै._ऑग._सप्टें._ऑक्टो._नोव्हें._डिसें.'.split('_'),
         weekdays : 'रविवार_सोमवार_मंगळवार_बुधवार_गुरूवार_शुक्रवार_शनिवार'.split('_'),
@@ -47,8 +65,13 @@
             LTS : 'A h:mm:ss वाजता',
             L : 'DD/MM/YYYY',
             LL : 'D MMMM YYYY',
+<<<<<<< HEAD
             LLL : 'D MMMM YYYY, LT',
             LLLL : 'dddd, D MMMM YYYY, LT'
+=======
+            LLL : 'D MMMM YYYY, A h:mm वाजता',
+            LLLL : 'dddd, D MMMM YYYY, A h:mm वाजता'
+>>>>>>> master
         },
         calendar : {
             sameDay : '[आज] LT',
@@ -98,8 +121,12 @@
                 return hour + 12;
             }
         },
+<<<<<<< HEAD
         meridiem: function (hour, minute, isLower)
         {
+=======
+        meridiem: function (hour, minute, isLower) {
+>>>>>>> master
             if (hour < 4) {
                 return 'रात्री';
             } else if (hour < 10) {
@@ -117,4 +144,11 @@
             doy : 6  // The week that contains Jan 1st is the first week of the year.
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return mr;
+
+}));
+>>>>>>> master

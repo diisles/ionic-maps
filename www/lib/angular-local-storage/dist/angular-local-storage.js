@@ -1,6 +1,10 @@
 /**
  * An Angular module that gives you access to the browsers local storage
+<<<<<<< HEAD
  * @version v0.2.6 - 2016-03-16
+=======
+ * @version v0.4.0 - 2016-08-26
+>>>>>>> master
  * @link https://github.com/grevory/angular-local-storage
  * @author grevory <greg@gregpike.ca>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -31,11 +35,24 @@ angular
     // Cookie options (usually in case of fallback)
     // expiry = Number of days before cookies expire // 0 = Does not expire
     // path = The web path the cookie represents
+<<<<<<< HEAD
     this.cookie = {
       expiry: 30,
       path: '/'
     };
 
+=======
+    // secure = Wether the cookies should be secure (i.e only sent on HTTPS requests)
+    this.cookie = {
+      expiry: 30,
+      path: '/',
+      secure: false
+    };
+
+    // Decides wether we should default to cookies if localstorage is not supported.
+    this.defaultToCookie = true;
+
+>>>>>>> master
     // Send signals for each of the following actions?
     this.notify = {
       setItem: true,
@@ -53,11 +70,24 @@ angular
       this.storageType = storageType;
       return this;
     };
+<<<<<<< HEAD
 
     // Setter for cookie config
     this.setStorageCookie = function(exp, path) {
       this.cookie.expiry = exp;
       this.cookie.path = path;
+=======
+    // Setter for defaultToCookie value, default is true.
+    this.setDefaultToCookie = function (shouldDefault) {
+      this.defaultToCookie = !!shouldDefault; // Double-not to make sure it's a bool value.
+      return this;
+    };
+    // Setter for cookie config
+    this.setStorageCookie = function(exp, path, secure) {
+      this.cookie.expiry = exp;
+      this.cookie.path = path;
+      this.cookie.secure = secure;
+>>>>>>> master
       return this;
     };
 
@@ -77,7 +107,11 @@ angular
       return this;
     };
 
+<<<<<<< HEAD
     this.$get = ['$rootScope', '$window', '$document', '$parse', function($rootScope, $window, $document, $parse) {
+=======
+    this.$get = ['$rootScope', '$window', '$document', '$parse','$timeout', function($rootScope, $window, $document, $parse, $timeout) {
+>>>>>>> master
       var self = this;
       var prefix = self.prefix;
       var cookie = self.cookie;
@@ -99,8 +133,24 @@ angular
       var deriveQualifiedKey = function(key) {
         return prefix + key;
       };
+<<<<<<< HEAD
       // Checks the browser to see if local storage is supported
       var browserSupportsLocalStorage = (function () {
+=======
+
+      // Removes prefix from the key.
+      var underiveQualifiedKey = function (key) {
+        return key.replace(new RegExp('^' + prefix, 'g'), '');
+      };
+
+      // Check if the key is within our prefix namespace.
+      var isKeyPrefixOurs = function (key) {
+        return key.indexOf(prefix) === 0;
+      };
+
+      // Checks the browser to see if local storage is supported
+      var checkSupport = function () {
+>>>>>>> master
         try {
           var supported = (storageType in $window && $window[storageType] !== null);
 
@@ -118,16 +168,33 @@ angular
 
           return supported;
         } catch (e) {
+<<<<<<< HEAD
           storageType = 'cookie';
           $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
           return false;
         }
       }());
+=======
+          // Only change storageType to cookies if defaulting is enabled.
+          if (self.defaultToCookie)
+            storageType = 'cookie';
+          $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+          return false;
+        }
+      };
+      var browserSupportsLocalStorage = checkSupport();
+>>>>>>> master
 
       // Directly adds a value to local storage
       // If local storage is not available in the browser use cookies
       // Example use: localStorageService.add('library','angular');
+<<<<<<< HEAD
       var addToLocalStorage = function (key, value) {
+=======
+      var addToLocalStorage = function (key, value, type) {
+        setStorageType(type);
+
+>>>>>>> master
         // Let's convert undefined values to null to get the value consistent
         if (isUndefined(value)) {
           value = null;
@@ -136,7 +203,11 @@ angular
         }
 
         // If this browser does not support local storage use cookies
+<<<<<<< HEAD
         if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
+=======
+        if (!browserSupportsLocalStorage && self.defaultToCookie || self.storageType === 'cookie') {
+>>>>>>> master
           if (!browserSupportsLocalStorage) {
             $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
           }
@@ -163,9 +234,16 @@ angular
 
       // Directly get a value from local storage
       // Example use: localStorageService.get('library'); // returns 'angular'
+<<<<<<< HEAD
       var getFromLocalStorage = function (key) {
 
         if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
+=======
+      var getFromLocalStorage = function (key, type) {
+        setStorageType(type);
+
+        if (!browserSupportsLocalStorage && self.defaultToCookie  || self.storageType === 'cookie') {
+>>>>>>> master
           if (!browserSupportsLocalStorage) {
             $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
           }
@@ -189,11 +267,32 @@ angular
 
       // Remove an item from local storage
       // Example use: localStorageService.remove('library'); // removes the key/value pair of library='angular'
+<<<<<<< HEAD
       var removeFromLocalStorage = function () {
         var i, key;
         for (i=0; i<arguments.length; i++) {
           key = arguments[i];
           if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
+=======
+      //
+      // This is var-arg removal, check the last argument to see if it is a storageType
+      // and set type accordingly before removing.
+      //
+      var removeFromLocalStorage = function () {
+        // can't pop on arguments, so we do this
+        var consumed = 0;
+        if (arguments.length >= 1 &&
+            (arguments[arguments.length - 1] === 'localStorage' ||
+             arguments[arguments.length - 1] === 'sessionStorage')) {
+          consumed = 1;
+          setStorageType(arguments[arguments.length - 1]);
+        }
+
+        var i, key;
+        for (i = 0; i < arguments.length - consumed; i++) {
+          key = arguments[i];
+          if (!browserSupportsLocalStorage && self.defaultToCookie || self.storageType === 'cookie') {
+>>>>>>> master
             if (!browserSupportsLocalStorage) {
               $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
             }
@@ -222,7 +321,12 @@ angular
 
       // Return array of keys for local storage
       // Example use: var keys = localStorageService.keys()
+<<<<<<< HEAD
       var getKeysForLocalStorage = function () {
+=======
+      var getKeysForLocalStorage = function (type) {
+        setStorageType(type);
+>>>>>>> master
 
         if (!browserSupportsLocalStorage) {
           $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
@@ -249,20 +353,34 @@ angular
       // Also optionally takes a regular expression string and removes the matching key-value pairs
       // Example use: localStorageService.clearAll();
       // Should be used mostly for development purposes
+<<<<<<< HEAD
       var clearAllFromLocalStorage = function (regularExpression) {
+=======
+      var clearAllFromLocalStorage = function (regularExpression, type) {
+        setStorageType(type);
+>>>>>>> master
 
         // Setting both regular expressions independently
         // Empty strings result in catchall RegExp
         var prefixRegex = !!prefix ? new RegExp('^' + prefix) : new RegExp();
         var testRegex = !!regularExpression ? new RegExp(regularExpression) : new RegExp();
 
+<<<<<<< HEAD
         if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
+=======
+        if (!browserSupportsLocalStorage && self.defaultToCookie  || self.storageType === 'cookie') {
+>>>>>>> master
           if (!browserSupportsLocalStorage) {
             $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
           }
           return clearAllFromCookies();
         }
+<<<<<<< HEAD
 
+=======
+        if (!browserSupportsLocalStorage && !self.defaultToCookie)
+          return false;
+>>>>>>> master
         var prefixLength = prefix.length;
 
         for (var key in webStorage) {
@@ -292,9 +410,15 @@ angular
         }());
 
         // Directly adds a value to cookies
+<<<<<<< HEAD
         // Typically used as a fallback is local storage is not available in the browser
         // Example use: localStorageService.cookie.add('library','angular');
         var addToCookies = function (key, value, daysToExpiry) {
+=======
+        // Typically used as a fallback if local storage is not available in the browser
+        // Example use: localStorageService.cookie.add('library','angular');
+        var addToCookies = function (key, value, daysToExpiry, secure) {
+>>>>>>> master
 
           if (isUndefined(value)) {
             return false;
@@ -326,9 +450,29 @@ angular
             }
             if (!!key) {
               var cookiePath = "; path=" + cookie.path;
+<<<<<<< HEAD
               if(cookie.domain){
                 cookieDomain = "; domain=" + cookie.domain;
               }
+=======
+              if (cookie.domain) {
+                cookieDomain = "; domain=" + cookie.domain;
+              }
+              /* Providing the secure parameter always takes precedence over config
+               * (allows developer to mix and match secure + non-secure) */
+              if (typeof secure === 'boolean') {
+                  if (secure === true) {
+                      /* We've explicitly specified secure,
+                       * add the secure attribute to the cookie (after domain) */
+                      cookieDomain += "; secure";
+                  }
+                  // else - secure has been supplied but isn't true - so don't set secure flag, regardless of what config says
+              }
+              else if (cookie.secure === true) {
+                  // secure parameter wasn't specified, get default from config
+                  cookieDomain += "; secure";
+              }
+>>>>>>> master
               $document.cookie = deriveQualifiedKey(key) + "=" + encodeURIComponent(value) + expiry + cookiePath + cookieDomain;
             }
           } catch (e) {
@@ -369,7 +513,11 @@ angular
         };
 
         var clearAllFromCookies = function () {
+<<<<<<< HEAD
           var thisCookie = null, thisKey = null;
+=======
+          var thisCookie = null;
+>>>>>>> master
           var prefixLength = prefix.length;
           var cookies = $document.cookie.split(';');
           for(var i = 0; i < cookies.length; i++) {
@@ -388,11 +536,27 @@ angular
           return storageType;
         };
 
+<<<<<<< HEAD
         // Add a listener on scope variable to save its changes to local storage
         // Return a function which when called cancels binding
         var bindToScope = function(scope, key, def, lsKey) {
           lsKey = lsKey || key;
           var value = getFromLocalStorage(lsKey);
+=======
+        var setStorageType = function(type) {
+          if (type && storageType !== type) {
+            storageType = type;
+            browserSupportsLocalStorage = checkSupport();
+          }
+          return browserSupportsLocalStorage;
+        };
+
+        // Add a listener on scope variable to save its changes to local storage
+        // Return a function which when called cancels binding
+        var bindToScope = function(scope, key, def, lsKey, type) {
+          lsKey = lsKey || key;
+          var value = getFromLocalStorage(lsKey, type);
+>>>>>>> master
 
           if (value === null && isDefined(def)) {
             value = def;
@@ -403,6 +567,7 @@ angular
           $parse(key).assign(scope, value);
 
           return scope.$watch(key, function(newVal) {
+<<<<<<< HEAD
             addToLocalStorage(lsKey, newVal);
           }, isObject(scope[key]));
         };
@@ -410,6 +575,47 @@ angular
         // Return localStorageService.length
         // ignore keys that not owned
         var lengthOfLocalStorage = function() {
+=======
+            addToLocalStorage(lsKey, newVal, type);
+          }, isObject(scope[key]));
+        };
+
+        // Add listener to local storage, for update callbacks.
+        if (browserSupportsLocalStorage) {
+            if ($window.addEventListener) {
+                $window.addEventListener("storage", handleStorageChangeCallback, false);
+                $rootScope.$on('$destroy', function() {
+                  $window.removeEventListener("storage", handleStorageChangeCallback);
+                });
+            } else if($window.attachEvent){
+                // attachEvent and detachEvent are proprietary to IE v6-10
+                $window.attachEvent("onstorage", handleStorageChangeCallback);
+                $rootScope.$on('$destroy', function() {
+                  $window.detachEvent("onstorage", handleStorageChangeCallback);
+                });
+            }
+        }
+
+        // Callback handler for storage changed.
+        function handleStorageChangeCallback(e) {
+            if (!e) { e = $window.event; }
+            if (notify.setItem) {
+                if (isKeyPrefixOurs(e.key)) {
+                    var key = underiveQualifiedKey(e.key);
+                    // Use timeout, to avoid using $rootScope.$apply.
+                    $timeout(function () {
+                        $rootScope.$broadcast('LocalStorageModule.notification.changed', { key: key, newvalue: e.newValue, storageType: self.storageType });
+                    });
+                }
+            }
+        }
+
+        // Return localStorageService.length
+        // ignore keys that not owned
+        var lengthOfLocalStorage = function(type) {
+          setStorageType(type);
+
+>>>>>>> master
           var count = 0;
           var storage = $window[storageType];
           for(var i = 0; i < storage.length; i++) {
@@ -423,6 +629,10 @@ angular
         return {
           isSupported: browserSupportsLocalStorage,
           getStorageType: getStorageType,
+<<<<<<< HEAD
+=======
+          setStorageType: setStorageType,
+>>>>>>> master
           set: addToLocalStorage,
           add: addToLocalStorage, //DEPRECATED
           get: getFromLocalStorage,
@@ -431,7 +641,13 @@ angular
           clearAll: clearAllFromLocalStorage,
           bind: bindToScope,
           deriveKey: deriveQualifiedKey,
+<<<<<<< HEAD
           length: lengthOfLocalStorage,
+=======
+          underiveKey: underiveQualifiedKey,
+          length: lengthOfLocalStorage,
+          defaultToCookie: this.defaultToCookie,
+>>>>>>> master
           cookie: {
             isSupported: browserSupportsCookies,
             set: addToCookies,

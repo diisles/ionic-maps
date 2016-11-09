@@ -1,5 +1,6 @@
 {
   "name": "moment",
+<<<<<<< HEAD
   "version": "2.9.0",
   "main": "moment.js",
   "ignore": [
@@ -9,11 +10,27 @@
     "test",
     "tests",
     "tasks",
+=======
+  "main": "moment.js",
+  "ignore": [
+    "**/.*",
+    "benchmarks",
+    "bower_components",
+    "meteor",
+    "node_modules",
+    "scripts",
+    "tasks",
+    "test",
+>>>>>>> master
     "component.json",
     "composer.json",
     "CONTRIBUTING.md",
     "ender.js",
     "Gruntfile.js",
+<<<<<<< HEAD
+=======
+    "Moment.js.nuspec",
+>>>>>>> master
     "package.js",
     "package.json"
   ]

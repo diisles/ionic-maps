@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : breton (br)
 // author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
@@ -11,6 +12,19 @@
         factory((typeof global !== 'undefined' ? global : this).moment); // node or other global
     }
 }(function (moment) {
+=======
+//! moment.js locale configuration
+//! locale : breton (br)
+//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+>>>>>>> master
     function relativeTimeWithMutation(number, withoutSuffix, key) {
         var format = {
             'mm': 'munutenn',
@@ -19,7 +33,10 @@
         };
         return number + ' ' + mutation(format[key], number);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     function specialMutationForYears(number) {
         switch (lastNumber(number)) {
         case 1:
@@ -32,21 +49,30 @@
             return number + ' vloaz';
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     function lastNumber(number) {
         if (number > 9) {
             return lastNumber(number % 10);
         }
         return number;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     function mutation(text, number) {
         if (number === 2) {
             return softMutation(text);
         }
         return text;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     function softMutation(text) {
         var mutationTable = {
             'm': 'v',
@@ -59,7 +85,11 @@
         return mutationTable[text.charAt(0)] + text.substring(1);
     }
 
+<<<<<<< HEAD
     return moment.defineLocale('br', {
+=======
+    var br = moment.defineLocale('br', {
+>>>>>>> master
         months : 'Genver_C\'hwevrer_Meurzh_Ebrel_Mae_Mezheven_Gouere_Eost_Gwengolo_Here_Du_Kerzu'.split('_'),
         monthsShort : 'Gen_C\'hwe_Meu_Ebr_Mae_Eve_Gou_Eos_Gwe_Her_Du_Ker'.split('_'),
         weekdays : 'Sul_Lun_Meurzh_Merc\'her_Yaou_Gwener_Sadorn'.split('_'),
@@ -70,8 +100,13 @@
             LTS : 'h[e]mm:ss A',
             L : 'DD/MM/YYYY',
             LL : 'D [a viz] MMMM YYYY',
+<<<<<<< HEAD
             LLL : 'D [a viz] MMMM YYYY LT',
             LLLL : 'dddd, D [a viz] MMMM YYYY LT'
+=======
+            LLL : 'D [a viz] MMMM YYYY h[e]mm A',
+            LLLL : 'dddd, D [a viz] MMMM YYYY h[e]mm A'
+>>>>>>> master
         },
         calendar : {
             sameDay : '[Hiziv da] LT',
@@ -106,4 +141,11 @@
             doy : 4  // The week that contains Jan 4th is the first week of the year.
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return br;
+
+}));
+>>>>>>> master

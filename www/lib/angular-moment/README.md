@@ -15,7 +15,11 @@ You can choose your preferred method of installation:
 * Through bower: `bower install angular-moment --save`
 * Through npm: `npm install angular-moment --save`
 * Through NuGet: `Install-Package angular-moment`
+<<<<<<< HEAD
 * From a CDN: [jsDelivr](https://cdn.jsdelivr.net/angular.moment/0.9.2/angular-moment.min.js) or [CDNJS](https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.2/angular-moment.min.js)
+=======
+* From a CDN: [jsDelivr](https://cdn.jsdelivr.net/angular.moment/0.10.3/angular-moment.min.js) or [CDNJS](https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js)
+>>>>>>> master
 * Download from github: [angular-moment.min.js](https://raw.github.com/urish/angular-moment/master/angular-moment.min.js)
 
 Usage
@@ -119,6 +123,47 @@ This snippet will return the number of days between the current date and the dat
 For more information about Moment.JS difference function, see the
 [docs for the diff() function](http://momentjs.com/docs/#/displaying/difference/).
 
+<<<<<<< HEAD
+=======
+### amDurationFormat filter
+
+Formats a duration (such as 5 days) in a human readable format. See [Moment.JS documentation](http://momentjs.com/docs/#/durations/creating/) for a list of supported duration formats, and [`humanize() documentation`](http://momentjs.com/docs/#/durations/humanize/) for explanation about the formatting algorithm.
+
+Example:
+
+```html
+<span>Message age: {{message.ageInMinutes | amDurationFormat : 'minute' }}</span>
+```
+
+Will display the age of the message (e.g. 10 minutes, 1 hour, 2 days, etc).
+
+### amSubtract filter
+
+Subtract values (hours, minutes, seconds ...) from a specified date.
+
+See [Moment.JS documentation](http://momentjs.com/docs/#/durations/creating/) for a list of supported duration formats.
+
+Example:
+
+```html
+<span>Start time: {{day.start | amSubtract : '1' : 'hours' | amDateFormat : 'hh'}} : {{day.start | amSubtract : '30' : 'minutes' | amDateFormat : 'mm'}}</span>
+
+```
+
+### amAdd filter
+
+Add values (hours, minutes, seconds ...) to a specified date.
+
+See [Moment.JS documentation](http://momentjs.com/docs/#/durations/creating/) for a list of supported duration formats.
+
+Example:
+
+```html
+<span>Start time: {{day.start | amAdd : '1' : 'hours' | amDateFormat : 'hh'}} : {{day.start | amAdd : '30' : 'minutes' | amDateFormat : 'mm'}}</span>
+
+```
+
+>>>>>>> master
 ### Time zone support
 
 The `amDateFormat` and `amCalendar` filters can be configured to display dates aligned
@@ -138,6 +183,7 @@ or simply download from [here](https://rawgithub.com/qw4n7y/7282780/raw/6ae3b334
 License
 ----
 
+<<<<<<< HEAD
 Released under the terms of MIT License:
 
 Permission is hereby granted, free of charge, to any person obtaining
@@ -158,3 +204,6 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+=======
+Released under the terms of the [MIT License](LICENSE).
+>>>>>>> master

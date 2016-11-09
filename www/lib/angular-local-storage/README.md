@@ -17,6 +17,10 @@ An Angular module that gives you access to the browsers local storage
 - [Configuration](#configuration)
  - [setPrefix](#setprefix)
  - [setStorageType](#setstoragetype)
+<<<<<<< HEAD
+=======
+ - [setDefaultToCookie](#setdefaulttocookie)
+>>>>>>> master
  - [setStorageCookie](#setstoragecookie)
  - [setStorageCookieDomain](#setstoragecookiedomain)
  - [setNotify](#setnotify)
@@ -40,7 +44,11 @@ An Angular module that gives you access to the browsers local storage
     - [clearAll](#cookieclearall)
 
 ##Get Started
+<<<<<<< HEAD
 **(1)** You can install angular-local-storage using 2 different ways:<br/>
+=======
+**(1)** You can install angular-local-storage using 3 different ways:<br/>
+>>>>>>> master
 **Git:**
 clone & build [this](https://github.com/grevory/angular-local-storage.git) repository<br/>
 **Bower:**
@@ -95,6 +103,7 @@ myApp.config(function (localStorageServiceProvider) {
     .setStorageType('sessionStorage');
 });
 ```
+<<<<<<< HEAD
 ###setStorageCookie
 Set cookie options (usually in case of fallback)<br/>
 **expiry:** number of days before cookies expire (0 = does not expire). **default:** `30`<br/>
@@ -103,6 +112,26 @@ Set cookie options (usually in case of fallback)<br/>
 myApp.config(function (localStorageServiceProvider) {
   localStorageServiceProvider
     .setStorageCookie(45, '<path>');
+=======
+###setDefaultToCookie
+If localStorage is not supported, the library will default to cookies instead. This behavior can be disabled.<br/>
+**Default:** `true`
+```js
+myApp.config(function (localStorageServiceProvider) {
+  localStorageServiceProvider
+    .setDefaultToCookie(false);
+});
+```
+###setStorageCookie
+Set cookie options (usually in case of fallback)<br/>
+**expiry:** number of days before cookies expire (0 = session cookie). **default:** `30`<br/>
+**path:** the web path the cookie represents. **default:** `'/'`<br/>
+**secure:** whether to store cookies as secure. **default:** `false`
+```js
+myApp.config(function (localStorageServiceProvider) {
+  localStorageServiceProvider
+    .setStorageCookie(45, '<path>', false);
+>>>>>>> master
 });
 ```
 ###setStorageCookieDomain
@@ -118,9 +147,16 @@ myApp.config(function (localStorageServiceProvider) {
 For local testing (when you are testing on localhost) set the domain to an empty string ''. Setting the domain to 'localhost' will not work on all browsers (eg. Chrome) since some browsers only allow you to set domain cookies for registry controlled domains, i.e. something ending in .com or so, but not IPs **or intranet hostnames** like localhost. </br>
 
 ###setNotify
+<<<<<<< HEAD
 Send signals for each of the following actions:<br/>
 **setItem** , default: `true`<br/>
 **removeItem** , default: `false`
+=======
+
+Configure whether events should be broadcasted on $rootScope for each of the following actions:<br/>
+**setItem** , default: `true`, event "LocalStorageModule.notification.setitem"<br/>
+**removeItem** , default: `false`, event "LocalStorageModule.notification.removeitem"
+>>>>>>> master
 ```js
 myApp.config(function (localStorageServiceProvider) {
   localStorageServiceProvider
@@ -139,7 +175,11 @@ myApp.config(function (localStorageServiceProvider) {
 ```
 ##API Documentation
 ##isSupported
+<<<<<<< HEAD
 Checks if the browser support the current storage type(e.g: `localStorage`, `sessionStorage`).  
+=======
+Checks if the browser support the current storage type(e.g: `localStorage`, `sessionStorage`).
+>>>>>>> master
 **Returns:** `Boolean`
 ```js
 myApp.controller('MainCtrl', function($scope, localStorageService) {
@@ -159,6 +199,10 @@ myApp.controller('MainCtrl', function($scope, localStorageService) {
   //...
 });
 ```
+<<<<<<< HEAD
+=======
+You can also dynamically change storage type by passing the storage type as the last parameter for any of the API calls. For example: `localStorageService.set(key, val, "sessionStorage");`
+>>>>>>> master
 ###set
 Directly adds a value to local storage.<br/>
 If local storage is not supported, use cookies instead.<br/>
@@ -229,9 +273,15 @@ myApp.controller('MainCtrl', function($scope, localStorageService) {
 });
 ```
 ###bind
+<<<<<<< HEAD
 Bind $scope key to localStorageService.  
 **Usage:** `localStorageService.bind(scope, property, value[optional], key[optional])`  
 ***key:*** The corresponding key used in local storage  
+=======
+Bind $scope key to localStorageService.
+**Usage:** `localStorageService.bind(scope, property, value[optional], key[optional])`
+***key:*** The corresponding key used in local storage
+>>>>>>> master
 **Returns:** deregistration function for this listener.
 ```js
 myApp.controller('MainCtrl', function($scope, localStorageService) {
@@ -259,7 +309,11 @@ myApp.controller('MainCtrl', function($scope, localStorageService) {
 ```
 
 ###deriveKey
+<<<<<<< HEAD
 Return the derive key  
+=======
+Return the derive key
+>>>>>>> master
 **Returns** `String`
 ```js
 myApp.controller('MainCtrl', function($scope, localStorageService) {
@@ -271,7 +325,11 @@ myApp.controller('MainCtrl', function($scope, localStorageService) {
 });
 ```
 ###length
+<<<<<<< HEAD
 Return localStorageService.length, ignore keys that not owned.  
+=======
+Return localStorageService.length, ignore keys that not owned.
+>>>>>>> master
 **Returns** `Number`
 ```js
 myApp.controller('MainCtrl', function($scope, localStorageService) {
@@ -283,7 +341,11 @@ myApp.controller('MainCtrl', function($scope, localStorageService) {
 ##Cookie
 Deal with browser's cookies directly.
 ##cookie.isSupported
+<<<<<<< HEAD
 Checks if cookies are enabled in the browser.  
+=======
+Checks if cookies are enabled in the browser.
+>>>>>>> master
 **Returns:** `Boolean`
 ```js
 myApp.controller('MainCtrl', function($scope, localStorageService) {
@@ -312,6 +374,14 @@ myApp.controller('MainCtrl', function($scope, localStorageService) {
     localStorageService.cookie.set(key,val,10)
 ```
 sets a cookie that expires in 10 days.
+<<<<<<< HEAD
+=======
+**Secure Cookie** Pass a fourth argument to set the cookie as secure [W3C](https://www.w3.org/TR/csp-cookies/#grammardef-secure)
+```js
+    localStorageService.cookie.set(key,val,null,false)
+```
+sets a cookie that is secure.
+>>>>>>> master
 ###cookie.get
 Directly get a value from a cookie.<br/>
 **Returns:** `value from local storage`
@@ -352,7 +422,11 @@ Check out the full demo at http://gregpike.net/demos/angular-local-storage/demo.
 
 ##Development:
 * Don't forget about tests.
+<<<<<<< HEAD
 * If you planning add some feature please create issue before.
+=======
+* If you're planning to add some feature please create an issue before.
+>>>>>>> master
 
 Clone the project:
 ```sh
@@ -367,8 +441,14 @@ $ grunt test
 **Deploy:**<br/>
 Run the build task, update version before(bower,package)
 ```sh
+<<<<<<< HEAD
 $ grunt dist
 $ git tag 0.*.*
+=======
+$ npm version patch|minor|major
+$ grunt dist
+$ git commit [message]
+>>>>>>> master
 $ git push origin master --tags
 ```
 

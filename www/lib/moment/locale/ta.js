@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : tamil (ta)
 // author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
@@ -37,6 +38,20 @@
         }; */
 
     return moment.defineLocale('ta', {
+=======
+//! moment.js locale configuration
+//! locale : tamil (ta)
+//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+    var ta = moment.defineLocale('ta', {
+>>>>>>> master
         months : 'ஜனவரி_பிப்ரவரி_மார்ச்_ஏப்ரல்_மே_ஜூன்_ஜூலை_ஆகஸ்ட்_செப்டெம்பர்_அக்டோபர்_நவம்பர்_டிசம்பர்'.split('_'),
         monthsShort : 'ஜனவரி_பிப்ரவரி_மார்ச்_ஏப்ரல்_மே_ஜூன்_ஜூலை_ஆகஸ்ட்_செப்டெம்பர்_அக்டோபர்_நவம்பர்_டிசம்பர்'.split('_'),
         weekdays : 'ஞாயிற்றுக்கிழமை_திங்கட்கிழமை_செவ்வாய்கிழமை_புதன்கிழமை_வியாழக்கிழமை_வெள்ளிக்கிழமை_சனிக்கிழமை'.split('_'),
@@ -44,11 +59,19 @@
         weekdaysMin : 'ஞா_தி_செ_பு_வி_வெ_ச'.split('_'),
         longDateFormat : {
             LT : 'HH:mm',
+<<<<<<< HEAD
             LTS : 'LT:ss',
             L : 'DD/MM/YYYY',
             LL : 'D MMMM YYYY',
             LLL : 'D MMMM YYYY, LT',
             LLLL : 'dddd, D MMMM YYYY, LT'
+=======
+            LTS : 'HH:mm:ss',
+            L : 'DD/MM/YYYY',
+            LL : 'D MMMM YYYY',
+            LLL : 'D MMMM YYYY, HH:mm',
+            LLLL : 'dddd, D MMMM YYYY, HH:mm'
+>>>>>>> master
         },
         calendar : {
             sameDay : '[இன்று] LT',
@@ -73,6 +96,7 @@
             y : 'ஒரு வருடம்',
             yy : '%d ஆண்டுகள்'
         },
+<<<<<<< HEAD
 /*        preparse: function (string) {
             return string.replace(/[௧௨௩௪௫௬௭௮௯௦]/g, function (match) {
                 return numberMap[match];
@@ -83,12 +107,17 @@
                 return symbolMap[match];
             });
         },*/
+=======
+>>>>>>> master
         ordinalParse: /\d{1,2}வது/,
         ordinal : function (number) {
             return number + 'வது';
         },
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> master
         // refer http://ta.wikipedia.org/s/1er1
         meridiemParse: /யாமம்|வைகறை|காலை|நண்பகல்|எற்பாடு|மாலை/,
         meridiem : function (hour, minute, isLower) {
@@ -127,4 +156,11 @@
             doy : 6  // The week that contains Jan 1st is the first week of the year.
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return ta;
+
+}));
+>>>>>>> master

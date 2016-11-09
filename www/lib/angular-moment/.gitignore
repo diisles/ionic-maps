@@ -1,4 +1,9 @@
 /.idea
 /bower_components
 /node_modules
+<<<<<<< HEAD
 /coverage
+=======
+/coverage
+npm-debug.log
+>>>>>>> master

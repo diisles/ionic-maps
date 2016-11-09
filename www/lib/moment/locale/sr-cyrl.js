@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : Serbian-cyrillic (sr-cyrl)
 // author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
@@ -11,6 +12,19 @@
         factory((typeof global !== 'undefined' ? global : this).moment); // node or other global
     }
 }(function (moment) {
+=======
+//! moment.js locale configuration
+//! locale : Serbian-cyrillic (sr-cyrl)
+//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+>>>>>>> master
     var translator = {
         words: { //Different grammatical cases
             m: ['један минут', 'једне минуте'],
@@ -34,7 +48,11 @@
         }
     };
 
+<<<<<<< HEAD
     return moment.defineLocale('sr-cyrl', {
+=======
+    var sr_cyrl = moment.defineLocale('sr-cyrl', {
+>>>>>>> master
         months: ['јануар', 'фебруар', 'март', 'април', 'мај', 'јун', 'јул', 'август', 'септембар', 'октобар', 'новембар', 'децембар'],
         monthsShort: ['јан.', 'феб.', 'мар.', 'апр.', 'мај', 'јун', 'јул', 'авг.', 'сеп.', 'окт.', 'нов.', 'дец.'],
         weekdays: ['недеља', 'понедељак', 'уторак', 'среда', 'четвртак', 'петак', 'субота'],
@@ -42,16 +60,27 @@
         weekdaysMin: ['не', 'по', 'ут', 'ср', 'че', 'пе', 'су'],
         longDateFormat: {
             LT: 'H:mm',
+<<<<<<< HEAD
             LTS : 'LT:ss',
             L: 'DD. MM. YYYY',
             LL: 'D. MMMM YYYY',
             LLL: 'D. MMMM YYYY LT',
             LLLL: 'dddd, D. MMMM YYYY LT'
+=======
+            LTS : 'H:mm:ss',
+            L: 'DD. MM. YYYY',
+            LL: 'D. MMMM YYYY',
+            LLL: 'D. MMMM YYYY H:mm',
+            LLLL: 'dddd, D. MMMM YYYY H:mm'
+>>>>>>> master
         },
         calendar: {
             sameDay: '[данас у] LT',
             nextDay: '[сутра у] LT',
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
             nextWeek: function () {
                 switch (this.day()) {
                 case 0:
@@ -104,4 +133,11 @@
             doy : 7  // The week that contains Jan 1st is the first week of the year.
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return sr_cyrl;
+
+}));
+>>>>>>> master

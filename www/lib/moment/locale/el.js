@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : modern greek (el)
 // author : Aggelos Karalias : https://github.com/mehiel
@@ -12,6 +13,20 @@
     }
 }(function (moment) {
     return moment.defineLocale('el', {
+=======
+//! moment.js locale configuration
+//! locale : modern greek (el)
+//! author : Aggelos Karalias : https://github.com/mehiel
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+    var el = moment.defineLocale('el', {
+>>>>>>> master
         monthsNominativeEl : 'Ιανουάριος_Φεβρουάριος_Μάρτιος_Απρίλιος_Μάιος_Ιούνιος_Ιούλιος_Αύγουστος_Σεπτέμβριος_Οκτώβριος_Νοέμβριος_Δεκέμβριος'.split('_'),
         monthsGenitiveEl : 'Ιανουαρίου_Φεβρουαρίου_Μαρτίου_Απριλίου_Μαΐου_Ιουνίου_Ιουλίου_Αυγούστου_Σεπτεμβρίου_Οκτωβρίου_Νοεμβρίου_Δεκεμβρίου'.split('_'),
         months : function (momentToFormat, format) {
@@ -41,8 +56,13 @@
             LTS : 'h:mm:ss A',
             L : 'DD/MM/YYYY',
             LL : 'D MMMM YYYY',
+<<<<<<< HEAD
             LLL : 'D MMMM YYYY LT',
             LLLL : 'dddd, D MMMM YYYY LT'
+=======
+            LLL : 'D MMMM YYYY h:mm A',
+            LLLL : 'dddd, D MMMM YYYY h:mm A'
+>>>>>>> master
         },
         calendarEl : {
             sameDay : '[Σήμερα {}] LT',
@@ -62,11 +82,17 @@
         calendar : function (key, mom) {
             var output = this._calendarEl[key],
                 hours = mom && mom.hours();
+<<<<<<< HEAD
 
             if (typeof output === 'function') {
                 output = output.apply(mom);
             }
 
+=======
+            if (typeof output === 'function') {
+                output = output.apply(mom);
+            }
+>>>>>>> master
             return output.replace('{}', (hours % 12 === 1 ? 'στη' : 'στις'));
         },
         relativeTime : {
@@ -91,4 +117,11 @@
             doy : 4  // The week that contains Jan 4st is the first week of the year.
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return el;
+
+}));
+>>>>>>> master

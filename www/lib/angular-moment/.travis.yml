@@ -1,4 +1,8 @@
 language: node_js
+<<<<<<< HEAD
+=======
+sudo: false
+>>>>>>> master
 node_js:
   - "0.10"
 before_script:

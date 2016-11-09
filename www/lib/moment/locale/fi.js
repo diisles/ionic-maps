@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : finnish (fi)
 // author : Tarmo Aidantausta : https://github.com/bleadof
@@ -11,12 +12,28 @@
         factory((typeof global !== 'undefined' ? global : this).moment); // node or other global
     }
 }(function (moment) {
+=======
+//! moment.js locale configuration
+//! locale : finnish (fi)
+//! author : Tarmo Aidantausta : https://github.com/bleadof
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+>>>>>>> master
     var numbersPast = 'nolla yksi kaksi kolme neljä viisi kuusi seitsemän kahdeksan yhdeksän'.split(' '),
         numbersFuture = [
             'nolla', 'yhden', 'kahden', 'kolmen', 'neljän', 'viiden', 'kuuden',
             numbersPast[7], numbersPast[8], numbersPast[9]
         ];
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     function translate(number, withoutSuffix, key, isFuture) {
         var result = '';
         switch (key) {
@@ -51,12 +68,19 @@
         result = verbalNumber(number, isFuture) + ' ' + result;
         return result;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     function verbalNumber(number, isFuture) {
         return number < 10 ? (isFuture ? numbersFuture[number] : numbersPast[number]) : number;
     }
 
+<<<<<<< HEAD
     return moment.defineLocale('fi', {
+=======
+    var fi = moment.defineLocale('fi', {
+>>>>>>> master
         months : 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split('_'),
         monthsShort : 'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split('_'),
         weekdays : 'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split('_'),
@@ -67,12 +91,21 @@
             LTS : 'HH.mm.ss',
             L : 'DD.MM.YYYY',
             LL : 'Do MMMM[ta] YYYY',
+<<<<<<< HEAD
             LLL : 'Do MMMM[ta] YYYY, [klo] LT',
             LLLL : 'dddd, Do MMMM[ta] YYYY, [klo] LT',
             l : 'D.M.YYYY',
             ll : 'Do MMM YYYY',
             lll : 'Do MMM YYYY, [klo] LT',
             llll : 'ddd, Do MMM YYYY, [klo] LT'
+=======
+            LLL : 'Do MMMM[ta] YYYY, [klo] HH.mm',
+            LLLL : 'dddd, Do MMMM[ta] YYYY, [klo] HH.mm',
+            l : 'D.M.YYYY',
+            ll : 'Do MMM YYYY',
+            lll : 'Do MMM YYYY, [klo] HH.mm',
+            llll : 'ddd, Do MMM YYYY, [klo] HH.mm'
+>>>>>>> master
         },
         calendar : {
             sameDay : '[tänään] [klo] LT',
@@ -104,4 +137,11 @@
             doy : 4  // The week that contains Jan 4th is the first week of the year.
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return fi;
+
+}));
+>>>>>>> master

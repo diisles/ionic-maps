@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : Georgian (ka)
 // author : Irakli Janiashvili : https://github.com/irakli-janiashvili
@@ -11,11 +12,25 @@
         factory((typeof global !== 'undefined' ? global : this).moment); // node or other global
     }
 }(function (moment) {
+=======
+//! moment.js locale configuration
+//! locale : Georgian (ka)
+//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+>>>>>>> master
     function monthsCaseReplace(m, format) {
         var months = {
             'nominative': 'იანვარი_თებერვალი_მარტი_აპრილი_მაისი_ივნისი_ივლისი_აგვისტო_სექტემბერი_ოქტომბერი_ნოემბერი_დეკემბერი'.split('_'),
             'accusative': 'იანვარს_თებერვალს_მარტს_აპრილის_მაისს_ივნისს_ივლისს_აგვისტს_სექტემბერს_ოქტომბერს_ნოემბერს_დეკემბერს'.split('_')
         },
+<<<<<<< HEAD
 
         nounCase = (/D[oD] *MMMM?/).test(format) ?
             'accusative' :
@@ -24,11 +39,19 @@
         return months[nounCase][m.month()];
     }
 
+=======
+        nounCase = (/D[oD] *MMMM?/).test(format) ?
+            'accusative' :
+            'nominative';
+        return months[nounCase][m.month()];
+    }
+>>>>>>> master
     function weekdaysCaseReplace(m, format) {
         var weekdays = {
             'nominative': 'კვირა_ორშაბათი_სამშაბათი_ოთხშაბათი_ხუთშაბათი_პარასკევი_შაბათი'.split('_'),
             'accusative': 'კვირას_ორშაბათს_სამშაბათს_ოთხშაბათს_ხუთშაბათს_პარასკევს_შაბათს'.split('_')
         },
+<<<<<<< HEAD
 
         nounCase = (/(წინა|შემდეგ)/).test(format) ?
             'accusative' :
@@ -38,6 +61,15 @@
     }
 
     return moment.defineLocale('ka', {
+=======
+        nounCase = (/(წინა|შემდეგ)/).test(format) ?
+            'accusative' :
+            'nominative';
+        return weekdays[nounCase][m.day()];
+    }
+
+    var ka = moment.defineLocale('ka', {
+>>>>>>> master
         months : monthsCaseReplace,
         monthsShort : 'იან_თებ_მარ_აპრ_მაი_ივნ_ივლ_აგვ_სექ_ოქტ_ნოე_დეკ'.split('_'),
         weekdays : weekdaysCaseReplace,
@@ -48,8 +80,13 @@
             LTS : 'h:mm:ss A',
             L : 'DD/MM/YYYY',
             LL : 'D MMMM YYYY',
+<<<<<<< HEAD
             LLL : 'D MMMM YYYY LT',
             LLLL : 'dddd, D MMMM YYYY LT'
+=======
+            LLL : 'D MMMM YYYY h:mm A',
+            LLLL : 'dddd, D MMMM YYYY h:mm A'
+>>>>>>> master
         },
         calendar : {
             sameDay : '[დღეს] LT[-ზე]',
@@ -90,6 +127,7 @@
             if (number === 0) {
                 return number;
             }
+<<<<<<< HEAD
 
             if (number === 1) {
                 return number + '-ლი';
@@ -99,6 +137,14 @@
                 return 'მე-' + number;
             }
 
+=======
+            if (number === 1) {
+                return number + '-ლი';
+            }
+            if ((number < 20) || (number <= 100 && (number % 20 === 0)) || (number % 100 === 0)) {
+                return 'მე-' + number;
+            }
+>>>>>>> master
             return number + '-ე';
         },
         week : {
@@ -106,4 +152,11 @@
             doy : 7
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return ka;
+
+}));
+>>>>>>> master

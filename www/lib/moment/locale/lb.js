@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // moment.js locale configuration
 // locale : Luxembourgish (lb)
 // author : mweimerskirch : https://github.com/mweimerskirch, David Raison : https://github.com/kwisatz
@@ -15,6 +16,19 @@
         factory((typeof global !== 'undefined' ? global : this).moment); // node or other global
     }
 }(function (moment) {
+=======
+//! moment.js locale configuration
+//! locale : Luxembourgish (lb)
+//! author : mweimerskirch : https://github.com/mweimerskirch, David Raison : https://github.com/kwisatz
+
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
+   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+   factory(global.moment)
+}(this, function (moment) { 'use strict';
+
+
+>>>>>>> master
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
         var format = {
             'm': ['eng Minutt', 'enger Minutt'],
@@ -25,7 +39,10 @@
         };
         return withoutSuffix ? format[key][0] : format[key][1];
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     function processFutureTime(string) {
         var number = string.substr(0, string.indexOf(' '));
         if (eifelerRegelAppliesToNumber(number)) {
@@ -33,7 +50,10 @@
         }
         return 'an ' + string;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     function processPastTime(string) {
         var number = string.substr(0, string.indexOf(' '));
         if (eifelerRegelAppliesToNumber(number)) {
@@ -41,7 +61,10 @@
         }
         return 'virun ' + string;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     /**
      * Returns true if the word before the given number loses the '-n' ending.
      * e.g. 'an 10 Deeg' but 'a 5 Deeg'
@@ -83,7 +106,11 @@
         }
     }
 
+<<<<<<< HEAD
     return moment.defineLocale('lb', {
+=======
+    var lb = moment.defineLocale('lb', {
+>>>>>>> master
         months: 'Januar_Februar_Mäerz_Abrëll_Mee_Juni_Juli_August_September_Oktober_November_Dezember'.split('_'),
         monthsShort: 'Jan._Febr._Mrz._Abr._Mee_Jun._Jul._Aug._Sept._Okt._Nov._Dez.'.split('_'),
         weekdays: 'Sonndeg_Méindeg_Dënschdeg_Mëttwoch_Donneschdeg_Freideg_Samschdeg'.split('_'),
@@ -94,8 +121,13 @@
             LTS: 'H:mm:ss [Auer]',
             L: 'DD.MM.YYYY',
             LL: 'D. MMMM YYYY',
+<<<<<<< HEAD
             LLL: 'D. MMMM YYYY LT',
             LLLL: 'dddd, D. MMMM YYYY LT'
+=======
+            LLL: 'D. MMMM YYYY H:mm [Auer]',
+            LLLL: 'dddd, D. MMMM YYYY H:mm [Auer]'
+>>>>>>> master
         },
         calendar: {
             sameDay: '[Haut um] LT',
@@ -136,4 +168,11 @@
             doy: 4  // The week that contains Jan 4th is the first week of the year.
         }
     });
+<<<<<<< HEAD
 }));
+=======
+
+    return lb;
+
+}));
+>>>>>>> master
