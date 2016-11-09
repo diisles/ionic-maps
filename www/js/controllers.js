@@ -127,6 +127,9 @@ function($scope,$http,$state,$stateParams, ApiGetDrivers,ApiPostDrivers,socket){
     return $scope.driver = response.data
   })
 })
+////////////////
+//used below code before I changed to proxyUrl
+///////////////
 
   // $scope.driverForm = {}
   //
@@ -140,7 +143,9 @@ function($scope,$http,$state,$stateParams, ApiGetDrivers,ApiPostDrivers,socket){
   //   $scope.driverForm.item = "")
   //  }
 
-
+///////////////////
+///Need to change the below controller to use the proxy set up in starter-services
+//////////////////
 .controller('TripCtrl', function($scope, $http,$state,ApiEndpoint){
   var getApiData = function(){
   $scope.trip = [];
@@ -338,6 +343,9 @@ function($scope,$http,$state,$stateParams, ApiGetDrivers,ApiPostDrivers,socket){
   };
 })
 
+///////////////////////
+///The 3 controllers below(91,89,87) need to be changed to look more like the mapCtrl in terms of using socket
+//////////////////////
 
 .controller('91TabCtrl', function($scope, $state, $cordovaGeolocation) {
   var options = {timeout: 10000, enableHighAccuracy: true};
@@ -461,7 +469,9 @@ function($scope,$http,$state,$stateParams, ApiGetDrivers,ApiPostDrivers,socket){
 
 
 
-
+///////////////////////
+//This is the MapCtrl that im trying to get sockets to work with.
+//////////////////////
 
 .controller('MapCtrl', function($scope, socket, $state, $cordovaGeolocation, $http) {
   var options = {timeout: 10000, enableHighAccuracy: true};

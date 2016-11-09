@@ -10,10 +10,10 @@ angular.module('services',[])
   //Create socket and connect to http://localhost3000
   var myIoSocket = io.connect('http://localhost:3000');
 
-  mySocket = socketFactory({
+  socket = socketFactory({
     ioSocket: myIoSocket,
     // path: '/stomp'
   });
 
-  return mySocket;
+  return socket;
 })

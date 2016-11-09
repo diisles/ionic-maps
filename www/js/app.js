@@ -4,7 +4,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'ngSanitize','ngCordova','ngOpenFB','btford.socket-io','starter.services','services'])
+angular.module('starter', ['ionic', 'ngSanitize','ngCordova','ngOpenFB','btford.socket-io','starter.services','services','angularMoment'])
 
 .constant('ApiEndpoint', {
   url: 'http://localhost:3000'
