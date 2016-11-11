@@ -1,6 +1,5 @@
 {
   "name": "moment",
-<<<<<<< HEAD
   "version": "2.9.0",
   "main": "moment.js",
   "ignore": [
@@ -10,41 +9,16 @@
     "test",
     "tests",
     "tasks",
-=======
-  "main": "moment.js",
-  "ignore": [
-    "**/.*",
-    "benchmarks",
-    "bower_components",
-    "meteor",
-    "node_modules",
-    "scripts",
-    "tasks",
-    "test",
->>>>>>> master
     "component.json",
     "composer.json",
     "CONTRIBUTING.md",
     "ender.js",
     "Gruntfile.js",
-<<<<<<< HEAD
-=======
     "Moment.js.nuspec",
->>>>>>> master
     "package.js",
     "package.json"
   ],
   "homepage": "https://github.com/moment/moment",
-<<<<<<< HEAD
-  "_release": "2.9.0",
-  "_resolution": {
-    "type": "version",
-    "tag": "2.9.0",
-    "commit": "8b35bc74c0e88c1a8c58ccb90117a9edc9f6a479"
-  },
-  "_source": "https://github.com/moment/moment.git",
-  "_target": "2.9.0",
-=======
   "version": "2.10.6",
   "_release": "2.10.6",
   "_resolution": {
@@ -54,6 +28,5 @@
   },
   "_source": "https://github.com/moment/moment.git",
   "_target": ">=2.8.0 <2.11.0",
->>>>>>> master
   "_originalSource": "moment"
 }
